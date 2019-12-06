@@ -15,6 +15,7 @@ class BoardPiece extends CGFobject{
         this.scene.scale(5,0.2,5);
         this.cube.display();
         this.scene.popMatrix();
+        
 
     }
 

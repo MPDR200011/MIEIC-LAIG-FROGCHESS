@@ -814,7 +814,7 @@ class MySceneGraph {
                     grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' &&
                     grandChildren[0].nodeName != 'torus' && grandChildren[0].nodeName != 'plane' &&
                     grandChildren[0].nodeName != 'patch' && grandChildren[0].nodeName != 'cylinder2'
-                    && grandChildren[0].nodeName != 'boardPiece')) {
+                    && grandChildren[0].nodeName != 'board')) {
                 return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere or torus)"
             }
 
@@ -1053,10 +1053,10 @@ class MySceneGraph {
                 let patch = new Patch(this.scene,npointsU,npointsV,npartsU,npartsV,controlPoints);
                 this.primitives[primitiveId] = patch;
 
-            }else if(primitiveType == 'boardPiece'){
+            }else if(primitiveType == 'board'){
 
-                let boardPiece = new BoardPiece(this.scene);
-                this.primitives[primitiveId] = boardPiece;
+                let board = new Board(this.scene);
+                this.primitives[primitiveId] = board;
             }
             
             
