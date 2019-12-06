@@ -28,6 +28,8 @@ serialInclude(['../lib/CGF.js',
 'Cylinder2.js',
 'MySecurityCamera.js',
 'Patch.js',
+'UnitCube.js',
+'BoardPiece.js',
 
 main=function()
 {
@@ -46,8 +48,8 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
 	
-    //var filename=getUrlVars()['file'] || "demo.xml";
-    var filename=getUrlVars()['file'] || "LAIG_TP1_XML_T6_G04.xml";
+    var filename=getUrlVars()['file'] || "board.xml";
+    //var filename=getUrlVars()['file'] || "LAIG_TP1_XML_T6_G04.xml";
 
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors

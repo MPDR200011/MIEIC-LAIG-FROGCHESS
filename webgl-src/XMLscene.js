@@ -201,5 +201,6 @@ class XMLscene extends CGFscene {
 
         this.gl.enable(this.gl.DEPTH_TEST);
         
+        
     }
 }

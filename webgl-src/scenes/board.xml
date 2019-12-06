@@ -3,7 +3,7 @@
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
-            <from x="30" y="15" z="30" />
+            <from x="5" y="15" z="5" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
@@ -25,7 +25,7 @@
     <textures>
         <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
         <texture id="chalk" file="scenes/images/blueChalk.jpg" />
-        <texture id="chalkBox" file="scenes/images/chalkSide.jpg"/>
+        <texture id="chalkBox" file="scenes/images/chalkSide.jpg" />
     </textures>
 
     <materials>
@@ -135,125 +135,179 @@
         <primitive id="demoSphere">
             <sphere radius="1" stacks="20" slices="30" />
         </primitive>
+        <primitive id="unitSquare">
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+        </primitive>
+        <primitive id="boardPiece">
+            <boardPiece />
+        </primitive>
     </primitives>
 
 
     <components>
-        <component id="chalksideXP">
+        <component id="topUnitCube">
             <transformation>
-                <translate x="0.5" y="0" z="0" />
-                <rotate axis="x" angle="90"/>
-                <rotate axis="z" angle="-90" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="chalkBox" length_s="1" length_t="1" />
-            <children>
-                <primitiveref id="nurbsPlane" />
-            </children>
-        </component>
-
-        <component id="chalksideXN">
-            <transformation>
-                <translate x="-0.5" y="0" z="0" />
-                <rotate axis="x" angle="90"/>
-                <rotate axis="z" angle="90" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="chalkBox" length_s="1" length_t="1" />
-            <children>
-                <primitiveref id="nurbsPlane" />
-            </children>
-        </component>
-
-        <component id="chalksideZP">
-            <transformation>
-                <translate x="0" y="0" z="0.5" />
-                <rotate axis="x" angle="90" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="chalkBox" length_s="1" length_t="1" />
-            <children>
-                <primitiveref id="nurbsPlane" />
-            </children>
-        </component>
-
-        <component id="chalksideZN">
-            <transformation>
-                <translate x="0" y="0" z="-0.5" />
-                <rotate axis="z" angle="180"/>
+                <translate x="0" y="0.5" z="0" />
                 <rotate axis="x" angle="-90" />
             </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="chalkBox" length_s="1" length_t="1" />
+
+            <texture id="inherit" />
+
             <children>
-                <primitiveref id="nurbsPlane" />
+                <primitiveref id="unitSquare" />
+
             </children>
+
         </component>
 
-        <component id="chalksideBot">
-                <transformation>
-                    <translate x="0" y="-0.5" z="0" />
-                    <rotate axis="x" angle="180" />
-                </transformation>
-                <materials>
-                    <material id="demoMaterial" />
-                </materials>
-                <texture id="demoTexture" length_s="1" length_t="1" />
-                <children>
-                    <primitiveref id="nurbsPlane" />
-                </children>
-            </component>
-
-            <component id="chalksideTop">
-                    <transformation>
-                        <translate x="0" y="0.5" z="0" />
-                    </transformation>
-                    <materials>
-                        <material id="demoMaterial" />
-                    </materials>
-                    <texture id="chalk" length_s="1" length_t="1" />
-                    <children>
-                        <primitiveref id="nurbsPlane" />
-                    </children>
-                </component>
-
-
-        <component id="chalk">
-            <transformation></transformation>
+        <component id="botUnitCube">
+            <transformation>
+                <translate x="0" y="-0.5" z="0" />
+                <rotate axis="x" angle="90" />
+            </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1" />
+
+            <texture id="inherit" />
+
             <children>
-                <componentref id="chalksideXP" />
-                <componentref id="chalksideXN" />
-                <componentref id="chalksideZP" />
-                <componentref id="chalksideZN" />
-                <componentref id="chalksideBot" />
-                <componentref id="chalksideTop" />
+                <primitiveref id="unitSquare" />
+
             </children>
+
         </component>
 
-
-        <component id="chandelier">
-            <transformation></transformation>
+        <component id="backUnitCube">
+            <transformation>
+                <translate x="0" y="0" z="-0.5" />
+                <rotate axis="y" angle="180" />
+            </transformation>
             <materials>
-                <material id="demoMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1" />
+
+            <texture id="inherit" />
+
             <children>
-                <primitiveref id="chandelier" />
-                <primitiveref id="chandelierInverted" />
+                <primitiveref id="unitSquare" />
+
+            </children>
+
+        </component>
+
+        <component id="frontUnitCube">
+            <transformation>
+                <translate x="0" y="0" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+
+            <texture id="inherit" />
+
+            <children>
+                <primitiveref id="unitSquare" />
+
+            </children>
+
+        </component>
+
+        <component id="rightUnitCube">
+            <transformation>
+                <translate x="-0.5" y="0" z="0" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+
+            <texture id="inherit" />
+
+            <children>
+                <primitiveref id="unitSquare" />
+
+            </children>
+
+        </component>
+
+        <component id="leftUnitCube">
+            <transformation>
+                <translate x="0.5" y="0" z="0" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+
+            <texture id="inherit" />
+
+            <children>
+                <primitiveref id="unitSquare" />
+
+            </children>
+
+        </component>
+        <component id="unitCube">
+            <transformation>
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit" />
+            <children>
+                <componentref id="topUnitCube" />
+                <componentref id="botUnitCube" />
+                <componentref id="leftUnitCube" />
+                <componentref id="rightUnitCube" />
+                <componentref id="frontUnitCube" />
+                <componentref id="backUnitCube" />
             </children>
         </component>
+
+        <component id="PieceBoardLight">
+            <transformation>
+                <scale x="5" y="0.2" z="5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit" />
+            <children>
+                <componentref id="unitCube" />
+            </children>
+        </component>
+
+        <component id="PieceBoardDark">
+            <transformation>
+                <scale x="5" y="0.2" z="5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit" />
+            <children>
+                <componentref id="unitCube" />
+            </children>
+        </component>
+
+        <component id="PieceBoardSwamp">
+            <transformation>
+                <scale x="5" y="0.2" z="5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="inherit" />
+            <children>
+                <componentref id="unitCube" />
+            </children>
+        </component>
+
 
         <component id="demoRoot">
             <transformation>
@@ -264,7 +318,7 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
-                <componentref id="chalk" />
+                <primitiveref id="boardPiece" />
             </children>
         </component>
     </components>
