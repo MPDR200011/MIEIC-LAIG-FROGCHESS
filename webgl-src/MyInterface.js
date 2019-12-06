@@ -41,10 +41,6 @@ class MyInterface extends CGFinterface {
         this.gui.add(graph, 'activeView', mapper)
         .name("Camera")
         .onChange(graph.changeCamera.bind(graph));
-        
-        this.gui.add(this.scene, 'securityView', mapper)
-        .name('Security Camera')
-        .onChange(this.scene.changeSecCamera.bind(this.scene));
 
         //lights
         var folder = this.gui.addFolder('Lights');
