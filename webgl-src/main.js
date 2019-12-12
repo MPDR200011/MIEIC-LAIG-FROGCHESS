@@ -29,6 +29,7 @@ serialInclude(['../lib/CGF.js',
 'MySecurityCamera.js',
 'Patch.js',
 'UnitCube.js',
+'MyQuad.js',
 'gamePrimitives/BoardPiece.js',
 'gamePrimitives/Board.js',
 
