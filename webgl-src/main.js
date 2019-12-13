@@ -29,7 +29,8 @@ serialInclude(['../lib/CGF.js',
 'objects/Patch.js',
 'objects/UnitCube.js',
 'game/GameState.js',
-
+'gamePrimitives/Board.js',
+'gamePrimitvies/Boardpiece.js',
 main=function()
 {
 	// Standard application, scene and interface setup
