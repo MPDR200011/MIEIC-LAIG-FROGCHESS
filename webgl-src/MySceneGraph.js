@@ -814,7 +814,7 @@ class MySceneGraph {
                     grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' &&
                     grandChildren[0].nodeName != 'torus' && grandChildren[0].nodeName != 'plane' &&
                     grandChildren[0].nodeName != 'patch' && grandChildren[0].nodeName != 'cylinder2'
-                    && grandChildren[0].nodeName != 'board')) {
+                    && grandChildren[0].nodeName != 'board' && grandChildren[0].nodeName!= 'unitCube')) {
                 return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere or torus)"
             }
 
@@ -1060,6 +1060,10 @@ class MySceneGraph {
             }
             
             
+            else if(primitiveType == 'unitCube') {
+                let unitCube = new UnitCube(this.scene);
+                this.primitives[primitiveId] = unitCube;
+            }
             else {
                 console.warn("To do: Parse other primitives.");
             }

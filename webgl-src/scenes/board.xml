@@ -3,7 +3,7 @@
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
-            <from x="5" y="30" z="5" />
+            <from x="0" y="40" z="20" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
@@ -24,8 +24,8 @@
 
     <textures>
         <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
-        <texture id="chalk" file="scenes/images/blueChalk.jpg" />
-        <texture id="chalkBox" file="scenes/images/test.png" />
+        <texture id="boardTex" file="scenes/images/marbleBoard.jpg" />
+        <texture id="wood" file="scenes/images/darkMarble.jpg" />
     </textures>
 
     <materials>
@@ -141,170 +141,89 @@
         <primitive id="boardPiece">
             <board />
         </primitive>
+        <primitive id="unitCube">
+            <unitCube />>
+        </primitive>
     </primitives>
 
 
     <components>
-        <component id="topUnitCube">
+
+        <component id="boardSideN">
             <transformation>
-                <translate x="0" y="0.5" z="0" />
-                <rotate axis="x" angle="-90" />
+                <translate x="0" y="0.4" z="-25" />
+                <scale x="40" y="1" z="10" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-
-            <texture id="inherit" />
-
+            <texture id="wood" length_s="1" length_t="1" />
             <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-
-        <component id="botUnitCube">
-            <transformation>
-                <translate x="0" y="-0.5" z="0" />
-                <rotate axis="x" angle="90" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-
-            <texture id="inherit" />
-
-            <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-
-        <component id="backUnitCube">
-            <transformation>
-                <translate x="0" y="0" z="-0.5" />
-                <rotate axis="y" angle="180" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-
-            <texture id="inherit" />
-
-            <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-
-        <component id="frontUnitCube">
-            <transformation>
-                <translate x="0" y="0" z="0.5" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-
-            <texture id="inherit" />
-
-            <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-
-        <component id="rightUnitCube">
-            <transformation>
-                <translate x="-0.5" y="0" z="0" />
-                <rotate axis="y" angle="-90" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-
-            <texture id="inherit" />
-
-            <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-
-        <component id="leftUnitCube">
-            <transformation>
-                <translate x="0.5" y="0" z="0" />
-                <rotate axis="y" angle="90" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-
-            <texture id="inherit" />
-
-            <children>
-                <primitiveref id="unitSquare" />
-
-            </children>
-
-        </component>
-        <component id="unitCube">
-            <transformation>
-                <scale x="1" y="1" z="1" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit" />
-            <children>
-                <componentref id="topUnitCube" />
-                <componentref id="botUnitCube" />
-                <componentref id="leftUnitCube" />
-                <componentref id="rightUnitCube" />
-                <componentref id="frontUnitCube" />
-                <componentref id="backUnitCube" />
+                <primitiveref  id = "unitCube" />
             </children>
         </component>
 
-        <component id="PieceBoardLight">
+        <component id="boardSideS">
             <transformation>
-                <scale x="5" y="0.2" z="5" />
+                <translate x="0" y="0.4" z="25" />
+                <scale x="40" y="1" z="10" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wood" length_s="1" length_t="1" />
             <children>
-                <componentref id="unitCube" />
+                <primitiveref  id = "unitCube" />
+                
             </children>
         </component>
 
-        <component id="PieceBoardDark">
+        <component id="boardSideW">
             <transformation>
-                <scale x="5" y="0.2" z="5" />
+                <translate x="-25" y="0.4" z="0" />  
+                <scale x="10" y="1" z="60" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wood" length_s="1" length_t="1" />
             <children>
-                <componentref id="unitCube" />
+                <primitiveref  id = "unitCube" />
+                
             </children>
         </component>
 
-        <component id="PieceBoardSwamp">
+        <component id="boardSideE">
             <transformation>
-                <scale x="5" y="0.2" z="5" />
+                <translate x="25" y="0.4" z="0" />  
+                <scale x="10" y="1" z="60" />
             </transformation>
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" />
+            <texture id="wood" length_s="1" length_t="1" />
             <children>
-                <componentref id="unitCube" />
+                <primitiveref  id = "unitCube" />
+                
+            </children>
+        </component>
+        
+
+        <component id="board">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="boardTex" length_s="1" length_t="1" />
+            <children>
+                
+                <primitiveref id="boardPiece" />
+                <componentref  id = "boardSideN" />
+                <componentref  id = "boardSideS" />
+                <componentref  id = "boardSideE" />
+                <componentref  id = "boardSideW" />
             </children>
         </component>
 
@@ -316,10 +235,9 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="chalk" length_s="1" length_t="1" />
+            <texture id="boardTex" length_s="1" length_t="1" />
             <children>
-                <primitiveref  id = "demoRectangle" />
-                <primitiveref id="boardPiece" />
+                <componentref id = "board" />
             </children>
         </component>
     </components>
