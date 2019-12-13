@@ -1,4 +1,18 @@
 :- ensure_loaded('matrix_util.pl').
+
+defaultBoard(
+    [
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,0,0,0,0,0,0,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1]
+    ]
+).
+
 %%%%%%%%%%%%%%%%%%%%%
 %return true if the cell is empty
 %is_empty_cell(+Board, +Coordinates)
@@ -134,3 +148,23 @@ checkSwamp(Board, X, Y, _, Height, ResultBoard):-
     Y =:= Height,
     change_cell(Board, X, Y, -1, ResultBoard).
 checkSwamp(Board, _, _, _, _, Board).
+
+% Checks if coordinates (X,Y) in Board
+% represent a valid cell to place a frog piece.
+% In other words, a cell set to 0.
+validateEmptyCoords(Board, X, Y) :-
+    cell(Board, X, Y, V),
+    V =:= 0.
+
+% Checks whether given cell coords in a Boar hold a piece of the specified Player
+validatePlayerCoords(Board, X, Y, Player) :-
+    cell(Board, X, Y, V),
+    write(V), nl,
+    V =:= Player.
+
+% Checks wether the cell at coords X,Y in the Board,
+% which belongs to the Player, can be used for any move.
+checkPossibility(Board, Player, X, Y) :-
+    findall([Xf, Yf], valid_move(Player, Board, [X, Y, Xf, Yf]), ValidMoves),
+    length(ValidMoves, L),
+    L > 0.
