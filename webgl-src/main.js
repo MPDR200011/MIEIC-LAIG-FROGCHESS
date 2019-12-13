@@ -28,7 +28,9 @@ serialInclude(['../lib/CGF.js',
 'Cylinder2.js',
 'Patch.js',
 'UnitCube.js',
-'BoardPiece.js',
+'MyQuad.js',
+'gamePrimitives/BoardPiece.js',
+'gamePrimitives/Board.js',
 
 main=function()
 {

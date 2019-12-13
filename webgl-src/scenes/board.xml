@@ -3,7 +3,7 @@
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
-            <from x="5" y="15" z="5" />
+            <from x="5" y="30" z="5" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
@@ -25,7 +25,7 @@
     <textures>
         <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
         <texture id="chalk" file="scenes/images/blueChalk.jpg" />
-        <texture id="chalkBox" file="scenes/images/chalkSide.jpg" />
+        <texture id="chalkBox" file="scenes/images/test.png" />
     </textures>
 
     <materials>
@@ -139,7 +139,7 @@
             <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="boardPiece">
-            <boardPiece />
+            <board />
         </primitive>
     </primitives>
 
@@ -316,8 +316,9 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1" />
+            <texture id="chalk" length_s="1" length_t="1" />
             <children>
+                <primitiveref  id = "demoRectangle" />
                 <primitiveref id="boardPiece" />
             </children>
         </component>
