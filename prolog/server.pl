@@ -1,6 +1,9 @@
 :-use_module(library(sockets)).
 :-use_module(library(lists)).
 :-use_module(library(codesio)).
+:-ensure_loaded('game_logic.pl').
+:-ensure_loaded('ai.pl').
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%                                        Server                                                   %%%%
@@ -105,6 +108,21 @@ print_header_line(_).
 
 parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
+
+parse_input(is_empty_cell(Board, [X,Y]), 'true') :- is_cell_empty(Board, [X,Y]).
+parse_input(is_empty_cell(_, [_,_]), 'false').
+
+parse_input(valid_dest([Xs,Ys,Xd,Yd]), 'true'):- valid_dest([Xs,Ys,Xd,Yd]).
+parse_input(valid_dest([_,_,_,_]), 'false').
+
+parse_input(valid_move(Player ,Board,[Xs,Ys,Xd,Yd]), 'true'):-valid_move(Player ,Board,[Xs,Ys,Xd,Yd]). 
+parse_input(valid_move(_,_,[_,_,_,_]), 'false').
+
+parse_input(defaultBoard, B) :- defaultBoard(B).
+
+parse_input(choose_move(Board,Depth,Player,Move), 'true'):-choose_move(Board,Depth,Player,Move).
+parse_input(choose_move(_,_,_,_), false).
+
 parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.

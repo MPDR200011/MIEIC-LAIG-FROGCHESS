@@ -48,6 +48,9 @@ class XMLscene extends CGFscene {
         this.shaderIndex = 1;
 
         this.setActiveShader(this.shaders[this.shaderIndex]);
+
+        let state = new GameState(this);
+        state.initialize();
     }
 
     update(t) {
