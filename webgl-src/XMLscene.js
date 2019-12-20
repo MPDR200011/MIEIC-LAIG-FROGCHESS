@@ -49,14 +49,30 @@ class XMLscene extends CGFscene {
 
         this.setActiveShader(this.shaders[this.shaderIndex]);
 
-        let state = new GameState(this);
-        state.initialize();
+        this.state = new GameState(this);
+        this.state.initialize();
+
+        this.controller = new GameController(this, this.state);
     }
 
     update(t) {
         if (this.sceneInited) {
             this.graph.updateAnimations(t);
         }
+    }
+
+    logPicking() {
+		if (this.pickMode == false) {
+			if (this.pickResults != null && this.pickResults.length > 0) {
+				for (var i = 0; i < this.pickResults.length; i++) {
+					var obj = this.pickResults[i][0];
+					if (obj) {
+						console.log("Picked piece:" + obj.coords);						
+					}
+				}
+				this.pickResults.splice(0, this.pickResults.length);
+			}
+		}
     }
 
     changeShader(i) {
@@ -128,6 +144,7 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         this.interface.build(this.graph);
+        this.controller.initialize();
 
         this.sceneInited = true;
     }
@@ -136,6 +153,7 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
+        this.logPicking();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene

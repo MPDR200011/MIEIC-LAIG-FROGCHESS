@@ -209,7 +209,6 @@
             </materials>
             <texture id="boardTex" length_s="1" length_t="1" />
             <children>
-                
                 <primitiveref id="boardPiece" />
                 <componentref  id = "boardSideN" />
                 <componentref  id = "boardSideS" />

@@ -1,25 +1,22 @@
 class Board extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.piece = new BoardPiece(scene);
+        this.pieces = [];
+        for (let i = 0; i < 64; i++) {
+            let coords = [i%8, Math.floor(i/8)];
+            this.pieces.push(new BoardPiece(this.scene, i, coords));
+        }
     }
 
-
-
     updateScaleFactors() {
-        this.piece.updateScaleFactors();
+        for (let i = 0; i < this.pieces.length; i++) {
+            this.pieces[i].updateScaleFactors();
+        }
     }
 
     display() {
-
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
-
-                this.scene.pushMatrix();
-                this.scene.translate(-17.5 +  5*i, 0, -17.5 + 5*j);
-                this.piece.display();
-                this.scene.popMatrix();
-            }
+        for (let i = 0; i < this.pieces.length; i++) {
+            this.pieces[i].display();
         }
     }
 
