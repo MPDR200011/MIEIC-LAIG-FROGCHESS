@@ -35,6 +35,19 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
+
+        <material id="frogMaterial1" shininess="10">
+            <emission r="0.0" g="0.0" b="0" a="1.0" />
+            <ambient r="0" g="1.0" b="0" a="1.0" />
+            <diffuse r="0" g="1.0" b="0" a="1.0" />
+            <specular r="0" g="1.0" b="0" a="1.0" />
+        </material>
+        <material id="frogMaterial2" shininess="10">
+            <emission r="0.0" g="0.0" b="0" a="1.0" />
+            <ambient r="1" g="1.0" b="0" a="1.0" />
+            <diffuse r="1" g="1.0" b="0" a="1.0" />
+            <specular r="1" g="1.0" b="0" a="1.0" />
+        </material>
     </materials>
 
     <transformations>
@@ -92,46 +105,6 @@
         <primitive id="nurbsPlane">
             <plane npartsU="20" npartsV="20" />
         </primitive>
-        <primitive id="chandelierInverted">
-            <patch npointsU="4" npointsV="4" npartsU="20" npartsV="20">
-                <controlpoint xx="-1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="0.0" zz="1.3333333333333333" />
-                <controlpoint xx="1" yy="0.0" zz="1.3333333333333333" />
-                <controlpoint xx="1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="1.1547005383792515" zz="0.6666666666666667" />
-                <controlpoint xx="1" yy="1.1547005383792515" zz="0.6666666666666667" />
-                <controlpoint xx="1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="1.1547005383792515" zz="-0.6666666666666663" />
-                <controlpoint xx="1" yy="1.1547005383792515" zz="-0.6666666666666663" />
-                <controlpoint xx="1" yy="0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="1.6328623988631375e-16" zz="-1.3333333333333333" />
-                <controlpoint xx="1" yy="1.6328623988631375e-16" zz="-1.3333333333333333" />
-                <controlpoint xx="1" yy="0.0" zz="-0.0" />
-            </patch>
-        </primitive>
-        <primitive id="chandelier">
-            <patch npointsU="4" npointsV="4" npartsU="20" npartsV="20">
-                <controlpoint xx="-1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="-0.0" zz="-1.3333333333333333" />
-                <controlpoint xx="1" yy="-0.0" zz="-1.3333333333333333" />
-                <controlpoint xx="1" yy="0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="-0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="1.1547005383792515" zz="-0.6666666666666667" />
-                <controlpoint xx="1" yy="1.1547005383792515" zz="-0.6666666666666667" />
-                <controlpoint xx="1" yy="-0.0" zz="0.0" />
-                <controlpoint xx="-1" yy="-0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="1.1547005383792515" zz="0.6666666666666663" />
-                <controlpoint xx="1" yy="1.1547005383792515" zz="0.6666666666666663" />
-                <controlpoint xx="1" yy="-0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="-0.0" zz="-0.0" />
-                <controlpoint xx="-1" yy="1.6328623988631375e-16" zz="1.3333333333333333" />
-                <controlpoint xx="1" yy="1.6328623988631375e-16" zz="1.3333333333333333" />
-                <controlpoint xx="1" yy="-0.0" zz="-0.0" />
-            </patch>
-        </primitive>
         <primitive id="demoSphere">
             <sphere radius="1" stacks="20" slices="30" />
         </primitive>
@@ -142,10 +115,10 @@
             <board />
         </primitive>
         <primitive id="unitCube">
-            <unitCube />>
+            <unitCube />
         </primitive>
         <primitive id="frog">
-            <frog />>
+            <frog />
         </primitive>
     </primitives>
 
@@ -159,9 +132,9 @@
                 <scale x="0.25" y="0.25" z="0.25"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="frogMaterial2" />
             </materials>
-            <texture id="wood" length_s="1" length_t="1" />
+            <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
                 <primitiveref  id = "frog" />
             </children>
