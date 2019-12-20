@@ -10,6 +10,16 @@ class GameState {
         this.player2Tray = [];
     }
 
+    setPosition(coords) {
+        let component = this.scene.graph.components['test'];
+
+        let mat = mat4.create();
+        mat4.translate(mat, mat, [-17.5 +  5*coords[0], 0, -17.5 + 5*coords[1]]);
+
+        component.transformationMatrix = mat;
+
+    }
+
     initialize() {
         let request = new XMLHttpRequest();
         request.open('GET', this.serverURL + 'defaultBoard', true);

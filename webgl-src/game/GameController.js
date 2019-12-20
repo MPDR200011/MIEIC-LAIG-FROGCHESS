@@ -11,6 +11,10 @@ class GameController {
 
     }
 
+    picked(coords) {
+        this.state.setPosition(coords);
+    }
+
     initialize() {
         this.board = this.scene.graph.primitives['boardPiece'];
     }

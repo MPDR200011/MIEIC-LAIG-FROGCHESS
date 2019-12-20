@@ -127,9 +127,6 @@
 
         <component id="test">
             <transformation>
-                <translate x="2.5" y="0.2" z="2.5"/>
-                <rotate axis="x" angle="-90" />
-                <scale x="0.25" y="0.25" z="0.25"/>
             </transformation>
             <materials>
                 <material id="frogMaterial2" />

@@ -67,7 +67,8 @@ class XMLscene extends CGFscene {
 				for (var i = 0; i < this.pickResults.length; i++) {
 					var obj = this.pickResults[i][0];
 					if (obj) {
-						console.log("Picked piece:" + obj.coords);						
+						//console.log("Picked piece:" + obj.coords);						
+                        this.controller.picked(obj.coords);
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);
