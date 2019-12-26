@@ -13,6 +13,9 @@ defaultBoard(
     ]
 ).
 
+isPlaceable(Board, [X,Y]):-
+    cell(Board,X,Y,0).
+
 %%%%%%%%%%%%%%%%%%%%%
 %return true if the cell is empty
 %is_empty_cell(+Board, +Coordinates)

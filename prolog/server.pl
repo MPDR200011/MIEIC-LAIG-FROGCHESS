@@ -112,8 +112,11 @@ parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(is_empty_cell(Board, [X,Y]), 'true') :- is_empty_cell(Board, [X,Y]).
 parse_input(is_empty_cell(_, [_,_]), 'false').
 
+parse_input(isPlaceable(Board, [X,Y]), 'true') :- isPlaceable(Board, [X,Y]).
+parse_input(isPlaceable(_, [_,_]), 'false').
+
 parse_input(boardComplete(Board), 'true') :- isBoardComplete(Board).
-parse_input(boardComplete(Board), 'false').
+parse_input(boardComplete(_), 'false').
 
 parse_input(valid_dest([Xs,Ys,Xd,Yd]), 'true'):- valid_dest([Xs,Ys,Xd,Yd]).
 parse_input(valid_dest([_,_,_,_]), 'false').

@@ -49,6 +49,7 @@ class XMLscene extends CGFscene {
 
         this.setActiveShader(this.shaders[this.shaderIndex]);
 
+        this.frogModel = new CGFOBJModel(this,"scenes/models/Frog.obj");
         this.state = new GameState(this);
         this.state.initialize();
 
@@ -182,6 +183,7 @@ class XMLscene extends CGFscene {
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
+            this.state.display();
         }
 
         this.popMatrix();

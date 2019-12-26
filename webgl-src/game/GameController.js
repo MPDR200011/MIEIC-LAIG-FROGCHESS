@@ -24,13 +24,13 @@ class GameController {
             case 'building':
                 this.currentPhase = 'awaiting';
 
-                let requestString = `http://localhost:8081/is_empty_cell(${boardString},${coordsString})`;
+                let requestString = `http://localhost:8081/isPlaceable(${boardString},${coordsString})`;
                 let response = await fetch(requestString, {
                     method: 'GET',
                 });
                 
                 if (await response.json()) {
-                    this.state.board[coords[1]][coords[0]] = this.currentPlayer;
+                    this.state.placeFrog(this.currentPlayer, coords[0], coords[1]);
                 } else {
                     this.currentPhase = 'building';
                     console.log('you idiot');
@@ -44,6 +44,7 @@ class GameController {
                 });
 
                 if (await response.json()) {
+                    console.log("next phase");
                     //next phase
                 } else {
                     this.currentPlayer = this.currentPlayer == 1 ? 2 : 1;
