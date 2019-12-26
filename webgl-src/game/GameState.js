@@ -20,16 +20,19 @@ class GameState {
 
     }
 
-    initialize() {
-        let request = new XMLHttpRequest();
-        request.open('GET', this.serverURL + 'defaultBoard', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
-        request.addEventListener('load', e => {
-            this.board = JSON.parse(e.currentTarget.responseText);
+    async initialize() {
+        let response = await fetch(this.serverURL + 'defaultBoard', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
         });
 
-        request.send();
+        this.board = await response.json();
+
+        console.log(this.board);
 
         for (let i = 0; i < 18; i++) {
             this.player1Tray.push(new BoardPiece(this.scene));
