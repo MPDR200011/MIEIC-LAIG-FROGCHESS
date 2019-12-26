@@ -3,7 +3,7 @@
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
-            <from x="0" y="40" z="20" />
+            <from x="0" y="60" z="20" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
@@ -118,8 +118,11 @@
         <primitive id="unitCube">
             <unitCube />
         </primitive>
-        <primitive id="frog">
-            <frog />
+        <primitive id="frogPlayer1">
+            <frogGroup player ="1" />
+        </primitive>
+        <primitive id="frogPlayer2">
+            <frogGroup player ="2" />
         </primitive>
     </primitives>
 
@@ -134,7 +137,7 @@
             </materials>
             <texture id="demoTexture" length_s="1" length_t="1" />
             <children>
-                <primitiveref  id = "frog" />
+                <primitiveref  id = "frogPlayer1" />
             </children>
         </component>
 
