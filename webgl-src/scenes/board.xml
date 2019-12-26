@@ -20,13 +20,21 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </omni>
+        <omni id="demoLight2" enabled="1">
+            <location x="0" y="-5" z="0" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
     </lights>
 
     <textures>
         <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
         <texture id="boardTex" file="scenes/images/marbleBoard.jpg" />
-        <texture id="wood" file="scenes/images/darkMarble.jpg" />
+        <texture id="darkMarble" file="scenes/images/darkMarble.jpg" />
+        <texture id="wood" file = "scenes/images/tableWood.jpg"/>
         <texture id="crystal" file="scenes/images/crystal.jpg" />
+        <texture id="carpet" file="scenes/images/carpet.jpg"/>
     </textures>
 
     <materials>
@@ -103,6 +111,10 @@
             <cylinder2 base="0.3" top="0.1" height="1" slices="20" stacks="10" />
         </primitive>
 
+        <primitive id="cone">
+            <cylinder2 base="0.3" top="0.1" height="1" slices="20" stacks="10" />
+        </primitive>
+
         <primitive id="nurbsPlane">
             <plane npartsU="20" npartsV="20" />
         </primitive>
@@ -141,6 +153,64 @@
             </children>
         </component>
 
+        <component id="tableTop">
+            <transformation>
+                <translate x="0" y="-1" z="0"/>
+                <scale x="90" y="0.5" z="90" />
+            </transformation>
+            <materials>
+                <material id="frogMaterial2" />
+            </materials>
+            <texture id="wood" length_s="1" length_t="1" />
+            <children>
+                <primitiveref  id = "unitCube" />
+            </children>
+         </component>
+
+        <component id="tableLeg">
+            <transformation>
+                <translate x="0" y="0" z="0"/>
+                <scale x="20" y="60" z="20"/>
+                <rotate axis="x" angle="90"/>
+            </transformation>
+            <materials>
+                <material id="frogMaterial2" />
+            </materials>
+            <texture id="wood" length_s="1" length_t="1" />
+            <children>
+                <primitiveref  id = "cone" />
+            </children>
+        </component>
+
+        <component id="tableBase">
+            <transformation>
+                <translate x="0" y="-59" z="0"/>
+                <scale x="40" y="0.001" z="40"/>
+            </transformation>
+            <materials>
+                <material id="frogMaterial2" />
+            </materials>
+            <texture id="wood" length_s="1" length_t="1" />
+            <children>
+                <primitiveref  id = "demoSphere" />
+            </children>
+        </component>
+
+        <component id="floor">
+            <transformation>
+                <translate x="0" y="-60" z="0"/>
+                <scale x="500" y="0.5" z="500" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="carpet" length_s="0.2" length_t="0.2" />
+            <children>
+                <primitiveref  id = "unitCube" />
+            </children>
+
+        </component>
+
         <component id="boardSideN">
             <transformation>
                 <translate x="0" y="0.4" z="-25" />
@@ -149,7 +219,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="wood" length_s="1" length_t="1" />
+            <texture id="darkMarble" length_s="1" length_t="1" />
             <children>
                 <primitiveref  id = "unitCube" />
             </children>
@@ -163,7 +233,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="wood" length_s="1" length_t="1" />
+            <texture id="darkMarble" length_s="1" length_t="1" />
             <children>
                 <primitiveref  id = "unitCube" />
                 
@@ -178,7 +248,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="wood" length_s="1" length_t="1" />
+            <texture id="darkMarble" length_s="1" length_t="1" />
             <children>
                 <primitiveref  id = "unitCube" />
                 
@@ -193,7 +263,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="wood" length_s="1" length_t="1" />
+            <texture id="darkMarble" length_s="1" length_t="1" />
             <children>
                 <primitiveref  id = "unitCube" />
                 
@@ -230,6 +300,10 @@
             <children>
                 <componentref id = "board" />
                 <componentref id = "test"/>
+                <componentref id = "tableTop"/>
+                <componentref id ="floor"/>
+                <componentref id= "tableLeg"/>
+                <componentref id= "tableBase"/>
             </children>
         </component>
     </components>
