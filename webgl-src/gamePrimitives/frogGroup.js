@@ -4,16 +4,28 @@ class FrogGroup extends CGFobject {
         this.pieces = [];
         let frogModel = new CGFOBJModel(scene,"scenes/models/Frog.obj")
         if (player === 1) {
-            for (let i = 0; i < 18; i++) {
-                this.pieces.push(new Frog(scene,-25 + i*5,25, frogModel) )
+            for (let i = 0; i < 9; i++) {
+                this.pieces.push(new Frog(scene,-22 + i*5,22, frogModel) )
+
+
+            }
+
+            for (let i = 0; i < 9; i++) {
+                this.pieces.push(new Frog(scene,-22 + i*5,27, frogModel) )
 
 
             }
         } else {
 
-            for (let i = 0; i < 18; i++) {
-                this.pieces.push(new Frog(scene,-25 + i*5,-25, frogModel) )
-                
+            for (let i = 0; i < 9; i++) {
+                this.pieces.push(new Frog(scene,-22 + i*5,-22, frogModel) )
+
+
+            }
+
+            for (let i = 0; i < 9; i++) {
+                this.pieces.push(new Frog(scene,-22 + i*5,-27, frogModel) )
+
 
             }
         }
