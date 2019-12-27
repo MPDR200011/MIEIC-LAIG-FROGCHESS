@@ -4,6 +4,10 @@ class GameState extends CGFobject{
 
         this.serverURL = 'http://localhost:8081/';
 
+        this.board = [];
+        this.player1Group = new FrogGroup(this.scene, 1);
+        this.player2Group = new FrogGroup(this.scene, 2);
+        this.groups = [this.player1Group, this.player2Group];
     }
 
     placeFrog(player, x, y) {
