@@ -13,12 +13,13 @@ class BoardPiece extends CGFobject{
     }
 
     display(){
-        this.scene.registerForPick(this.index+1, this);
+        this.scene.registerForPick(this.index+1, this.coords);
         this.scene.pushMatrix();
         this.scene.translate(-17.5 +  5*this.coords[0], 0, -17.5 + 5*this.coords[1]);
         this.scene.scale(5,0.2,5);
         this.cube.display();
         this.scene.popMatrix();
+        this.scene.clearPickRegistration();
     }
 
 }

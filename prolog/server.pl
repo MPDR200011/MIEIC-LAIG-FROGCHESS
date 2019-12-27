@@ -129,6 +129,14 @@ parse_input(defaultBoard, B) :- defaultBoard(B).
 parse_input(choose_move(Board,Depth,Player,Move), 'true'):-choose_move(Board,Depth,Player,Move).
 parse_input(choose_move(_,_,_,_), false).
 
+parse_input(checkSwamp(Board, X , Y), 'true') :-
+	size(Board, R, C),
+	checkSwamp(Board, X ,Y ,R,C,_).
+parse_input(checkSwamp(_, _, _), 'false').
+
+parse_input(game_over(Board, Player, OtherPlayer), Winner) :- game_over(Board, Player, OtherPlayer, Winner).
+parse_input(game_over(_, _, _), 'false').
+
 parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.

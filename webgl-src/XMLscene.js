@@ -54,6 +54,8 @@ class XMLscene extends CGFscene {
         this.state.initialize();
 
         this.controller = new GameController(this, this.state);
+
+        this.setPickEnabled(true);
     }
 
     update(t) {
@@ -69,7 +71,7 @@ class XMLscene extends CGFscene {
 					var obj = this.pickResults[i][0];
 					if (obj) {
 						//console.log("Picked piece:" + obj.coords);						
-                        this.controller.picked(obj.coords);
+                        this.controller.picked(obj);
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);

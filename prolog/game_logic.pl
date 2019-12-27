@@ -3,12 +3,12 @@
 defaultBoard(
     [
         [-1,-1,-1,-1,-1,-1,-1,-1],
-        [-1,0,0,0,0,0,0,-1],
-        [-1,0,0,0,0,0,0,-1],
-        [-1,0,0,0,0,0,0,-1],
-        [-1,0,0,0,0,0,0,-1],
-        [-1,0,0,0,0,0,0,-1],
-        [-1,0,0,0,0,0,0,-1],
+        [-1,1,2,1,2,1,2,-1],
+        [-1,2,1,2,1,2,1,-1],
+        [-1,1,2,1,2,1,2,-1],
+        [-1,2,1,2,1,2,1,-1],
+        [-1,1,2,1,2,1,2,-1],
+        [-1,2,1,2,1,2,1,-1],
         [-1,-1,-1,-1,-1,-1,-1,-1]
     ]
 ).
@@ -150,7 +150,6 @@ checkSwamp(Board, X, Y, _, _, ResultBoard):-
 checkSwamp(Board, X, Y, _, Height, ResultBoard):-
     Y =:= Height,
     change_cell(Board, X, Y, -1, ResultBoard).
-checkSwamp(Board, _, _, _, _, Board).
 
 % Checks if coordinates (X,Y) in Board
 % represent a valid cell to place a frog piece.

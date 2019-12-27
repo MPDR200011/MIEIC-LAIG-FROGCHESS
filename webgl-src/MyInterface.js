@@ -51,6 +51,13 @@ class MyInterface extends CGFinterface {
 
         //shader switching
         this.gui.add(this.scene, 'shaderIndex', this.scene.shaderMap).name("Shading Method: ").onChange(this.scene.changeShader.bind(this.scene));
+
+        this.controlsFolder = this.gui.addFolder('Game Controls');
+    }
+
+    resetControlsFolder() {
+        this.gui.removeFolder(this.controlsFolder);
+        this.controlsFolder = this.gui.addFolder('Game Controls');
     }
 
     /**

@@ -37,6 +37,9 @@ serialInclude(['../lib/CGF.js',
 'CGFResourceReader.js',
 'gamePrimitives/Frog.js',
 'gamePrimitives/FrogGroup.js',
+'game/gamePhases/GamePhase.js',
+'game/gamePhases/BuildingPhase.js',
+'game/gamePhases/PlayingPhase.js',
 main=function()
 {
 	// Standard application, scene and interface setup
