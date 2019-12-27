@@ -1,4 +1,4 @@
-class GameState extends CGFobject{
+class GameState extends CGFobject {
     constructor(scene) {
         super(scene);
 
@@ -11,7 +11,7 @@ class GameState extends CGFobject{
     }
 
     placeFrog(player, x, y) {
-        let group = this.groups[player-1];
+        let group = this.groups[player - 1];
 
         group.pieces.pop();
 
@@ -22,7 +22,7 @@ class GameState extends CGFobject{
         let component = this.scene.graph.components['test'];
 
         let mat = mat4.create();
-        mat4.translate(mat, mat, [-17.5 +  5*coords[0], 0, -17.5 + 5*coords[1]]);
+        mat4.translate(mat, mat, [-17.5 + 5 * coords[0], 0, -17.5 + 5 * coords[1]]);
 
         component.transformationMatrix = mat;
 
@@ -47,7 +47,7 @@ class GameState extends CGFobject{
     display() {
         this.player1Group.display();
         this.scene.pushMatrix()
-        this.scene.rotate(Math.PI,0,1,0)
+        this.scene.rotate(Math.PI, 0, 1, 0)
         this.player2Group.display();
         this.scene.popMatrix();
 
@@ -56,7 +56,10 @@ class GameState extends CGFobject{
                 let cell = this.board[i][j];
                 if (cell !== 0 && cell !== -1) {
                     this.scene.pushMatrix()
-                    this.scene.translate(-17.5 +  5*j, 0, -17.5 + 5*i);
+                    this.scene.translate(-17.5 + 5 * j, 0, -17.5 + 5 * i);
+                        if (cell === 2) {
+                            this.scene.rotate(Math.PI, 0, 1, 0)
+                        }
                     this.scene.frogModel.display();
                     this.scene.popMatrix();
                 }
