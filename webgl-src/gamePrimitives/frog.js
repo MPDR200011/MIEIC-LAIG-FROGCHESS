@@ -1,5 +1,5 @@
 class Frog extends CGFobject{
-    constructor(scene, x,z, frogModel){
+    constructor(scene,frogModel){
         super(scene)
         this.frog = frogModel;
     }

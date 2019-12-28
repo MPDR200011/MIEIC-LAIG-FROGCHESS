@@ -53,6 +53,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'shaderIndex', this.scene.shaderMap).name("Shading Method: ").onChange(this.scene.changeShader.bind(this.scene));
 
         this.controlsFolder = this.gui.addFolder('Game Controls');
+        this.controlsFolder.add(this.scene.controller,'gameModeIndex',this.scene.controller.gameMode).name("Game Mode: ")
+        this.controlsFolder.add(this.scene.controller,'aiDifficultyIndex',this.scene.controller.aiDifficulty).name("Ai Difficulty: ")
     }
 
     resetControlsFolder() {

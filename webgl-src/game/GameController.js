@@ -7,6 +7,12 @@ class GameController {
 
         this.state = state;
 
+        this.gameMode = {"P vs P" : 0, "P vs AI": 1, "AI vs P": 2, "AI vs AI":3};
+        this.gameModeIndex = 0;
+
+        this.aiDifficulty = {"level 0" : 0, "level 1": 1};
+        this.aiDifficultyIndex = 0;
+
     }
 
     switchTurn() {

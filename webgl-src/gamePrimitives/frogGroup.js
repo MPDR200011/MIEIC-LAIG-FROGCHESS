@@ -3,7 +3,7 @@ class FrogGroup extends CGFobject {
         super(scene);
         this.pieces = [];
         for (let i = 0; i < 18; i++) {
-            this.pieces.push(new Frog(scene,-25 + i*5,25, this.scene.frogModel) );
+            this.pieces.push(new Frog(scene , this.scene.frogModel) );
         }
     }
 
