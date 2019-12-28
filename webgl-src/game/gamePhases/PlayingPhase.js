@@ -81,6 +81,9 @@ class PlayingPhase extends GamePhase {
         }
 
         if (board[coords[1]][coords[0]] === currentPlayer && !this.jump) {
+            if (this.jumped) {
+                return null;
+            }
             this.pickedPos = coords;
             return null;
         }
