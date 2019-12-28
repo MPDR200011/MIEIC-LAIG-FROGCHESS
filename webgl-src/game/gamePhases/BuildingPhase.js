@@ -33,7 +33,7 @@ class BuildingPhase extends GamePhase {
             return;
         }
 
-        this.controller.switchPlayer();
+        this.controller.switchTurn();
 
         return;
     }

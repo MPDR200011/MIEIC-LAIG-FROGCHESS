@@ -9,8 +9,6 @@ class PlayingPhase extends GamePhase {
     async checkSwamp() {
         let board = this.state.board.board;
 
-        this.controller.waiting = true;
-
         let requestString =
         `http://localhost:8081/checkSwamp(${JSON.stringify(board)},${this.pickedPos[0]+1},${this.pickedPos[1]+1})`;
         let response = await fetch(requestString, {
@@ -24,8 +22,31 @@ class PlayingPhase extends GamePhase {
         this.pickedPos = null;
         this.jumped = false;
 
-        this.controller.waiting = false;
 
+    }
+
+    async checkEnd() {
+        let board = this.state.board.board;
+        
+        const otherPlayer = this.controller.currentPlayer === 1 ? 2 : 1;
+
+        let requestString =
+        `http://localhost:8081/game_over(${JSON.stringify(board)},${otherPlayer},${this.controller.currentPlayer})`;
+        let response = await fetch(requestString, {
+            method: 'GET'
+        });
+
+        if (await response.json()) {
+            console.log(otherPlayer + " victory.");
+        }
+
+    }
+
+    async checkConditions() {
+        this.controller.waiting = true;
+        await this.checkSwamp();
+        await this.checkEnd();
+        this.controller.waiting = false;
     }
 
     endTurn() {
@@ -33,7 +54,7 @@ class PlayingPhase extends GamePhase {
             return;
         }
 
-        this.checkSwamp();
+        this.checkConditions();
 
         this.controller.switchTurn();
     }
@@ -77,7 +98,7 @@ class PlayingPhase extends GamePhase {
             return null;
         } 
 
-        this.state.executeMove(currentPlayer, move);
+        this.state.board.executeMove(currentPlayer, move);
         this.jumped = true;
         this.pickedPos = coords;
 

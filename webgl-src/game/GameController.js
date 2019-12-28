@@ -36,7 +36,7 @@ class GameController {
 
     initialize() {
         this.board = this.scene.graph.primitives['boardPiece'];
-        this.switchPhase(new PlayingPhase(this));
+        this.switchPhase(new BuildingPhase(this));
         this.waiting = false;
     }
 }

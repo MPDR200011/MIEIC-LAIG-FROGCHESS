@@ -7,6 +7,19 @@ class BoardModel extends CGFobject {
         this.player2Group = new FrogGroup(this.scene, 2);
         this.groups = [this.player1Group, this.player2Group];
 
+        const player1Mat = new CGFappearance(this.scene);
+        player1Mat.setAmbient(0,0.3,0,1)
+        player1Mat.setDiffuse(0,1,0,1);
+
+        const player2Mat = new CGFappearance(this.scene);
+        player2Mat.setAmbient(0.3,0,0,1)
+        player2Mat.setDiffuse(1,0,0,1);
+
+        this.materials= {
+            1: player1Mat,
+            2: player2Mat
+        }
+
     }
 
 
@@ -54,9 +67,11 @@ class BoardModel extends CGFobject {
 
 
     display() {
+        this.materials[1].apply();
         this.player1Group.display();
         this.scene.pushMatrix()
         this.scene.rotate(Math.PI, 0, 1, 0)
+        this.materials[2].apply();
         this.player2Group.display();
         this.scene.popMatrix();
 
@@ -71,6 +86,7 @@ class BoardModel extends CGFobject {
                     if (cell === 2) {
                         this.scene.rotate(Math.PI, 0, 1, 0)
                     }
+                    this.materials[cell].apply();
                     this.scene.frogModel.display();
                     this.scene.popMatrix();
                     this.scene.clearPickRegistration();
