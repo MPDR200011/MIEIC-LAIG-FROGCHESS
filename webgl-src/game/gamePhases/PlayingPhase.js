@@ -7,7 +7,7 @@ class PlayingPhase extends GamePhase {
     }
 
     async checkSwamp() {
-        let board = this.state.board;
+        let board = this.state.board.board;
 
         this.controller.waiting = true;
 
@@ -48,7 +48,7 @@ class PlayingPhase extends GamePhase {
         let currentPlayer = this.controller.currentPlayer;
 
         console.log(coords);
-        let board = this.state.board;
+        let board = this.state.board.board;
         if (!this.pickedPos) {
             if (board[coords[1]][coords[0]] !== currentPlayer) {
                 return null;
