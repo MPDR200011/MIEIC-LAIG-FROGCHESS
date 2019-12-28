@@ -30,6 +30,8 @@ class BoardModel extends CGFobject {
             return;
         }
 
+        //record moves here
+
         board[move[3]][move[2]] = player;
         board[move[1]][move[0]] = 0;
 

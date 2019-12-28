@@ -42,7 +42,7 @@ class PlayingPhase extends GamePhase {
 
     }
 
-    async getAiMove(){
+    async AiMove(){
         let board = this.state.board.board
         let aiLevel = this.controller.aiDifficultyIndex;
         let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer},${'X'})`;
@@ -51,8 +51,12 @@ class PlayingPhase extends GamePhase {
             method: 'GET'
         })
         let move = await response.json();
-        
-        return move;
+
+        console.warn(move);
+        this.state.board.executeMove(currentPlayer,move);
+        this.endTurn();
+        return null;
+
 
     }
 
@@ -79,8 +83,10 @@ class PlayingPhase extends GamePhase {
         folder.add(this, 'endTurn');
     }
 
+
     async handlePick(coords) {
         let currentPlayer = this.controller.currentPlayer;
+
 
         console.log(coords);
         let board = this.state.board.board;
@@ -101,7 +107,6 @@ class PlayingPhase extends GamePhase {
             this.pickedPos = coords;
             return null;
         }
-        this.getAiMove();
 
         let move = [...this.pickedPos, ...coords];
         console.log(move);

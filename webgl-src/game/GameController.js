@@ -45,4 +45,10 @@ class GameController {
         this.switchPhase(new BuildingPhase(this));
         this.waiting = false;
     }
+
+    isAIturn(){
+        if(this.currentPlayer === 1)
+            return this.gameModeIndex === 2||this.gameModeIndex === 3
+        else return this.gameModeIndex === 1 || this.gameModeIndex ===3
+    }
 }
