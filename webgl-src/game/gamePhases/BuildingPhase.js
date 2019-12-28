@@ -6,7 +6,7 @@ class BuildingPhase extends GamePhase {
     async handlePick(coords) {
         let currentPlayer = this.controller.currentPlayer;
 
-        let boardString = JSON.stringify(this.state.board);
+        let boardString = JSON.stringify(this.state.board.board);
         let coordsString = JSON.stringify([coords[0]+1, coords[1]+1]);
 
         let requestString = `http://localhost:8081/isPlaceable(${boardString},${coordsString})`;
@@ -15,13 +15,13 @@ class BuildingPhase extends GamePhase {
         });
         
         if (await response.json()) {
-            this.state.placeFrog(currentPlayer, coords[0], coords[1]);
+            this.state.board.placeFrog(currentPlayer, coords[0], coords[1]);
         } else {
             console.log('you idiot');
             return;
         }
 
-        boardString = JSON.stringify(this.state.board);
+        boardString = JSON.stringify(this.state.board.board);
         requestString = `http://localhost:8081/boardComplete(${boardString})`;
         response = await fetch(requestString, {
             method: 'GET',
