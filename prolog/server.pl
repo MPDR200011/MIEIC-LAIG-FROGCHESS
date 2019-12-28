@@ -126,7 +126,7 @@ parse_input(valid_move(_,_,[_,_,_,_]), 'false').
 
 parse_input(defaultBoard, B) :- defaultBoard(B).
 
-parse_input(choose_move(Board,Depth,Player,Move), 'true'):-choose_move(Board,Depth,Player,Move).
+parse_input(choose_move(Board,Depth,Player,Move), Move):-choose_move(Board,Depth,Player,Move).
 parse_input(choose_move(_,_,_,_), false).
 
 parse_input(checkSwamp(Board, X , Y), 'true') :-

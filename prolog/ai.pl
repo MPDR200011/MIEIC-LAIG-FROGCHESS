@@ -49,12 +49,3 @@ choose_move(Board,1,Player,Move):-
     max2(ValueList,Largest),
     nth1(Index,ValueList,Largest),
     nth1(Index, ListOfMoves, Move).
-
-
-/*
-choose_move(Board,2,Player,Move):-
-    write('will do later').
-    */
-
-
-

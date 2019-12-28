@@ -42,6 +42,20 @@ class PlayingPhase extends GamePhase {
 
     }
 
+    async getAiMove(){
+        let board = this.state.board.board
+        let aiLevel = this.controller.aiDifficultyIndex;
+        let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer},${'X'})`;
+
+        let response = await fetch(requestString, {
+            method: 'GET'
+        })
+        let move = await response.json();
+        
+        return move;
+
+    }
+
     async checkConditions() {
         this.controller.waiting = true;
         await this.checkSwamp();
@@ -87,6 +101,7 @@ class PlayingPhase extends GamePhase {
             this.pickedPos = coords;
             return null;
         }
+        this.getAiMove();
 
         let move = [...this.pickedPos, ...coords];
         console.log(move);
@@ -107,4 +122,6 @@ class PlayingPhase extends GamePhase {
 
         return null;
     }
+
+
 }
