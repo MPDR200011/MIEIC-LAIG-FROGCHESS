@@ -61,4 +61,9 @@ class GameController {
         }
         else return this.gameModeIndex == 1 || this.gameModeIndex ==3
     }
+
+    startGame(){
+        
+    }
+
 }

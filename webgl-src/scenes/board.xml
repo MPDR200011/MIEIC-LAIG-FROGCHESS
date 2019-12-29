@@ -3,7 +3,17 @@
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="0" y="60" z="1" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+
+        <perspective id="greenPlayer" near="0.1" far="500" angle="45">
             <from x="0" y="60" z="20" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+
+        <perspective id="redPlayer" near="0.1" far="500" angle="45">
+            <from x="0" y="60" z="-20" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
