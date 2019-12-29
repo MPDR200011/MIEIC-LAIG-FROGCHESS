@@ -41,6 +41,9 @@ serialInclude(['../lib/CGF.js',
 'game/gamePhases/BuildingPhase.js',
 'game/gamePhases/PlayingPhase.js',
 'game/BoardModel.js',
+'game/MaterialDict.js',
+'animation/FrogMovement.js',
+'animation/AnimationController.js',
 main=function()
 {
 	// Standard application, scene and interface setup

@@ -54,6 +54,8 @@ class XMLscene extends CGFscene {
         this.state.initialize();
 
         this.controller = new GameController(this, this.state);
+        this.animationController = new AnimationController(this);
+        this.materialDict = new MaterialDict(this);
 
         this.setPickEnabled(true);
     }
@@ -62,6 +64,8 @@ class XMLscene extends CGFscene {
         if (this.sceneInited) {
             this.graph.updateAnimations(t);
         }
+
+        this.animationController.update(t);
     }
 
     logPicking() {

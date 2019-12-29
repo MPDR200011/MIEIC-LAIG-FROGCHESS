@@ -1,6 +1,7 @@
 class GamePhase {
     constructor(controller) {
         this.controller = controller;
+        this.scene = controller.scene;
         this.state = controller.state;
     }
 
