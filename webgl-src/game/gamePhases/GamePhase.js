@@ -6,10 +6,11 @@ class GamePhase {
     }
 
     tick() {
-        throw TypeError("Methdo handlePick() must be implemented.");
     }
 
     buildInterface(int) {
+        int.gui.destroy();
+        int.gui = new dat.GUI();
     }
 
     switchTurn() {}

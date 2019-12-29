@@ -65,6 +65,7 @@ class XMLscene extends CGFscene {
             this.graph.updateAnimations(t);
         }
 
+        this.controller.update(t);
         this.animationController.update(t);
     }
 

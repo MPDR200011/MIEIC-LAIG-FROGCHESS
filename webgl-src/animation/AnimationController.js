@@ -1,12 +1,15 @@
 class AnimationController {
     constructor(scene) {
-        this.animations = [];
+        this.animations = {};
         this.scene = scene;
         this.state = scene.state;
     }
 
     addAnimation(animation) {
-        this.animations.push(animation);
+        if (!this.animations[animation.frog.id]) {
+            this.animations[animation.frog.id] = [];
+        }
+        this.animations[animation.frog.id].push(animation);
 
         return animation;
     }
@@ -27,11 +30,11 @@ class AnimationController {
         moveAnimation.start();
     }
 
-    animateFromTableToTray(x, y, player) {
+    animateFromTableToTray(frog, player) {
         let model = this.state.board;
         let group = model.groups[player-1];
 
-        let frog = model.frogs[y][x];
+        //let frog = model.frogs[y][x];
         let animation = new FrogMovement(this.scene, frog, 0.5, frog.pos, group.getNextPosition());
         this.addAnimation(animation);
         animation.start();
@@ -45,10 +48,14 @@ class AnimationController {
     }
 
     update(t) {
-        this.animations.forEach(anim => {
-            anim.update(t);
-        });
+        let frogs = Object.keys(this.animations);
+        frogs.forEach(frog => {
+            let animation = this.animations[frog][0];
+            if (animation) {
+                animation.update(t);
 
-        this.animations = this.animations.filter(animation => !animation.finished);
+                this.animations[frog] = this.animations[frog].filter(animation => !animation.finished);
+            }
+        });
     }
 }

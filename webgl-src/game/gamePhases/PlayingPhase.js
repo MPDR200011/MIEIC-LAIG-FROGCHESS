@@ -16,21 +16,15 @@ class PlayingPhase extends GamePhase {
         });
 
         if (await response.json()) {
-            this.scene.animationController
-            .animateFromTableToTray(...this.pickedPos, currentPlayer);
-
             let frog = model.frogs[this.pickedPos[1]][this.pickedPos[0]];
+            this.scene.animationController
+            .animateFromTableToTray(frog, currentPlayer);
 
-            model.board[this.pickedPos[1]][this.pickedPos[0]] = 0;
+            model.board[this.pickedPos[1]][this.pickedPos[0]] = -1;
             model.frogs[this.pickedPos[1]][this.pickedPos[0]] = null;
 
             model.groups[currentPlayer-1].pieces.push(frog);
         }
-
-        this.pickedPos = null;
-        this.jumped = false;
-
-
     }
 
     async checkEnd(currentPlayer) {
@@ -47,8 +41,11 @@ class PlayingPhase extends GamePhase {
         let result = await response.json();
 
         if (result) {
-            console.log(result + " victory.");
+            this.controller.switchPhase(new GameOverPhase(this.controller, result));
         }
+
+        this.pickedPos = null;
+        this.jumped = false;
 
     }
 
@@ -89,6 +86,8 @@ class PlayingPhase extends GamePhase {
     }
 
     buildInterface(int) {
+        int.gui.destroy();
+        int.gui = new dat.GUI();
         int.gui.add(this, 'endTurn').name("End Turn");
     }
 
@@ -98,7 +97,12 @@ class PlayingPhase extends GamePhase {
         let currentPlayer = this.controller.currentPlayer;
 
         if(!this.controller.playerKinds[currentPlayer-1]){
+            if (this.controller.currentTime <= this.controller.botThreshold) {
+                this.controller.waiting = false;
+                return;
+            }
             await this.aiMove();
+            this.controller.botThreshold = this.controller.currentTime + 1000;
             this.controller.waiting = false;
             return;
         }

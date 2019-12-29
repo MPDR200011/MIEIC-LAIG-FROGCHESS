@@ -16,6 +16,16 @@ class GameController {
         this.playerKinds = [true, true];
 
         this.inputQueue = [];
+
+        this.currentTime = 0;
+        this.botThreshold = null;
+    }
+
+    update(t) {
+        if (this.botThreshold === null) {
+            this.botThreshold = t + 2000;
+        }
+        this.currentTime = t;
     }
 
     changeMode(mode) {
@@ -74,10 +84,8 @@ class GameController {
 
     initialize() {
         this.board = this.scene.graph.primitives['boardPiece'];
-        this.switchPhase(new BuildingPhase(this));
+        this.switchPhase(new SetupPhase(this));
         this.waiting = false;
     }
-    startGame(){
-        
-    }
+
 }

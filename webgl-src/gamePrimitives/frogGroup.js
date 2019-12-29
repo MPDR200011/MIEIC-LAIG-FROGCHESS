@@ -4,7 +4,7 @@ class FrogGroup extends CGFobject {
         this.pieces = [];
         this.offset = player === 1 ? 28 : -23;
         for (let i = 0; i < 18; i++) {
-            this.pieces.push(new Frog(scene, this.getAbsolutePositionAtIndex(i), player) );
+            this.pieces.push(new Frog(scene, this.getAbsolutePositionAtIndex(i), player, `${player}${i}`) );
         }
     }
 
@@ -21,7 +21,7 @@ class FrogGroup extends CGFobject {
     getAbsolutePositionAtIndex(i) {
         let x = Math.floor(i/2);
         let y = i % 2;
-        return [-20 + 5 * x, 0 , this.offset - 5 * y];
+        return [-20 + 5 * x, 0.8, this.offset - 5 * y];
     }
 
     getTailFrog() {

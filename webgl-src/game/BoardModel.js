@@ -33,9 +33,9 @@ class BoardModel extends CGFobject {
         this.scene.animationController
         .animateInBoard(...move);
 
-        setTimeout( _ => {
+       // setTimeout( _ => {
                 this.scene.animationController
-                .animateFromTableToTray(midpoint[0], midpoint[1], player)
+                .animateFromTableToTray(jumpedFrog, player);
 
                 group.pieces.push(jumpedFrog);
 
@@ -46,8 +46,8 @@ class BoardModel extends CGFobject {
 
                 board[midpoint[1]][midpoint[0]] = 0;
                 frogs[midpoint[1]][midpoint[0]] = null;
-            }, 
-            250); 
+           // }, 
+           // 250); 
     }
 
     placeFrog(player, x, y) {

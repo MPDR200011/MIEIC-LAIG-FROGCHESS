@@ -1,6 +1,7 @@
 class Frog extends CGFobject{
-    constructor(scene, pos, player){
-        super(scene)
+    constructor(scene, pos, player, id){
+        super(scene);
+        this.id = id;
         this.frog = this.scene.frogModel;
         this.pos = pos;
         this.player = player;

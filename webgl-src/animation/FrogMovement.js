@@ -40,6 +40,7 @@ class FrogMovement {
 
         if (this.startTime === null) {
             this.startTime = t;
+            this.sCoords = [...this.frog.pos];
         }
 
         const dT = t - this.startTime;

@@ -31,38 +31,6 @@ class MyInterface extends CGFinterface {
      * Generates the cameres drop down and the light checkboxes in the interface
      */
     build(graph) {
-        //cameras
-        /*
-        console.log("Building interface");
-        
-        let settings = this.gui.addFolder('settings')
-        let mapper = {};
-        let keys =Object.keys(graph.views);
-        for (let key of keys) {
-            mapper[key] = key;
-        }
-        settings.add(graph, 'activeView', mapper)
-        .name("Camera")
-        .onChange(graph.changeCamera.bind(graph));
-        //lights
-        var folder = settings.addFolder('Lights');
-        for(let i = 0; i < graph.numberOfLights; i++) {
-            folder.add(this.scene.lights[i], 'enabled')
-            .name("Light: " + i);
-        }
-        */
-        //shader switching
-        
-        //this.gui.add(this.scene, 'shaderIndex', this.scene.shaderMap).name("Shading Method: ").onChange(this.scene.changeShader.bind(this.scene));
-
-        //this.controlsFolder = this.gui.addFolder('Game Controls');
-        this.gui.add(this.scene.controller,'gameModeIndex',this.scene.controller.gameMode)
-        .name("Game Mode: ")
-        .onChange(this.scene.controller.changeMode.bind(this.scene.controller));
-
-        this.gui.add(this.scene.controller,'aiDifficultyIndex',this.scene.controller.aiDifficulty)
-        .name("Ai Difficulty: ");
-        this.controlsFolder.add(this.scene.controller,'startGame').name("Start Game");
     }
 
     resetControlsFolder() {

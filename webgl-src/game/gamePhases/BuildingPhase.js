@@ -40,7 +40,12 @@ class BuildingPhase extends GamePhase {
         let kind =this.controller.playerKinds[currentPlayer-1];
          
         if (!kind) {
+            if (this.controller.currentTime <= this.controller.botThreshold) {
+                this.controller.waiting = false;
+                return;
+            }
             await this.aiMove();
+            this.controller.botThreshold = this.controller.currentTime + 100;
             this.controller.waiting = false;
             return;
         }
