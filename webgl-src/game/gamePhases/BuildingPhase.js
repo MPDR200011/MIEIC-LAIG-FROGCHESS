@@ -44,7 +44,21 @@ class BuildingPhase extends GamePhase {
         });
         
         if (await response.json()) {
-            this.state.board.placeFrog(currentPlayer, coords[0], coords[1]);
+            const x = coords[0];
+            const y = coords[1];
+
+            let board = this.state.board.board;
+            let frogs = this.state.board.frogs;
+            let group = this.state.board.groups[currentPlayer-1];
+
+            let frog = group.getTailFrog();
+
+            this.scene.animationController
+            .animateToTable(frog, x, y); 
+
+            board[y][x] = currentPlayer;
+            frogs[y][x] = frog;
+            group.removeTailFrog();
         } else {
             console.log('you idiot');
             return;

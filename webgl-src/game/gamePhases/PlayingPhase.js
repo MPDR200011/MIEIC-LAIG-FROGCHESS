@@ -6,17 +6,25 @@ class PlayingPhase extends GamePhase {
         this.jumped = false;
     }
 
-    async checkSwamp() {
-        let board = this.state.board.board;
+    async checkSwamp(currentPlayer) {
+        let model = this.state.board;
 
         let requestString =
-        `http://localhost:8081/checkSwamp(${JSON.stringify(board)},${this.pickedPos[0]+1},${this.pickedPos[1]+1})`;
+        `http://localhost:8081/checkSwamp(${JSON.stringify(model.board)},${this.pickedPos[0]+1},${this.pickedPos[1]+1})`;
         let response = await fetch(requestString, {
             method: 'GET'
         });
 
         if (await response.json()) {
-            board[this.pickedPos[1]][this.pickedPos[0]] = 0;
+            this.scene.animationController
+            .animateFromTableToTray(...this.pickedPos, currentPlayer);
+
+            let frog = model.frogs[this.pickedPos[1]][this.pickedPos[0]];
+
+            model.board[this.pickedPos[1]][this.pickedPos[0]] = 0;
+            model.frogs[this.pickedPos[1]][this.pickedPos[0]] = null;
+
+            model.groups[currentPlayer-1].pieces.push(frog);
         }
 
         this.pickedPos = null;
@@ -25,19 +33,21 @@ class PlayingPhase extends GamePhase {
 
     }
 
-    async checkEnd() {
+    async checkEnd(currentPlayer) {
         let board = this.state.board.board;
         
-        const otherPlayer = this.controller.currentPlayer === 1 ? 2 : 1;
+        const otherPlayer = currentPlayer === 1 ? 2 : 1;
 
         let requestString =
-        `http://localhost:8081/game_over(${JSON.stringify(board)},${otherPlayer},${this.controller.currentPlayer})`;
+        `http://localhost:8081/game_over(${JSON.stringify(board)},${otherPlayer},${currentPlayer})`;
         let response = await fetch(requestString, {
             method: 'GET'
         });
 
-        if (await response.json()) {
-            console.log(otherPlayer + " victory.");
+        let result = await response.json();
+
+        if (result) {
+            console.log(result + " victory.");
         }
 
     }
@@ -64,9 +74,10 @@ class PlayingPhase extends GamePhase {
     }
 
     async checkConditions() {
+        let currentPlayer = this.controller.currentPlayer;
         this.controller.waiting = true;
-        await this.checkSwamp();
-        await this.checkEnd();
+        await this.checkSwamp(currentPlayer);
+        await this.checkEnd(currentPlayer);
         this.controller.waiting = false;
     }
 
@@ -83,7 +94,7 @@ class PlayingPhase extends GamePhase {
     buildInterface(int) {
         //int.resetControlsFolder();
         let folder = int.controlsFolder;
-        folder.add(this, 'endTurn');
+        folder.add(this, 'endTurn').name("End Turn");
     }
 
 

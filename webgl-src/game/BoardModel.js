@@ -3,44 +3,51 @@ class BoardModel extends CGFobject {
         super(scene);
         this.serverURL = 'http://localhost:8081/';
         this.board = [];
+        this.frogs = [];
         this.player1Group = new FrogGroup(this.scene, 1);
         this.player2Group = new FrogGroup(this.scene, 2);
         this.groups = [this.player1Group, this.player2Group];
-
-        const player1Mat = new CGFappearance(this.scene);
-        player1Mat.setAmbient(0,0.3,0,1)
-        player1Mat.setDiffuse(0,1,0,1);
-
-        const player2Mat = new CGFappearance(this.scene);
-        player2Mat.setAmbient(0.3,0,0,1)
-        player2Mat.setDiffuse(1,0,0,1);
-
-        this.materials= {
-            1: player1Mat,
-            2: player2Mat
-        }
-
     }
 
+    getAbsoluteBoardCoords(x, y) {
+        return [-17.5 + 5 * x, 0, -17.5 + 5 * y];
+    }
 
     executeMove(player, move) {
         let board = this.board;
+        let frogs = this.frogs;
+        let group  = this.groups[player-1];
         let valid = board[move[1]][move[0]] === player;
         if (!valid) {
             return;
         }
-
-        //record moves here
-
-        board[move[3]][move[2]] = player;
-        board[move[1]][move[0]] = 0;
 
         let midpoint = [
             Math.floor((move[0] + move[2]) / 2),
             Math.floor((move[1] + move[3]) / 2)
         ]
 
-        board[midpoint[1]][midpoint[0]] = 0;
+        let movedFrog = this.frogs[move[1]][move[0]];
+        let jumpedFrog = this.frogs[midpoint[1]][midpoint[0]];
+
+        this.scene.animationController
+        .animateInBoard(...move);
+
+        setTimeout( _ => {
+                this.scene.animationController
+                .animateFromTableToTray(midpoint[0], midpoint[1], player)
+
+                group.pieces.push(jumpedFrog);
+
+                board[move[3]][move[2]] = player;
+                board[move[1]][move[0]] = 0;
+                frogs[move[3]][move[2]] = movedFrog;
+                frogs[move[1]][move[0]] = null;
+
+                board[midpoint[1]][midpoint[0]] = 0;
+                frogs[midpoint[1]][midpoint[0]] = null;
+            }, 
+            250); 
     }
 
     placeFrog(player, x, y) {
@@ -49,6 +56,7 @@ class BoardModel extends CGFobject {
         group.pieces.pop();
 
         this.board[y][x] = player;
+        this.frogs[y][x] = new Frog(this.scene, this.getAbsoluteBoardCoords(x,y));
     }
 
     async initialize() {
@@ -62,6 +70,13 @@ class BoardModel extends CGFobject {
         });
 
         this.board = await response.json();
+        this.frogs = [];
+        for (let i = 0 ; i < this.board.length; i++){
+            this.frogs.push([]);
+            for (let j = 0; j < this.board[i].length; j++) {
+                this.frogs[i].push(null);
+            }
+        }
         this.player1Group = new FrogGroup(this.scene, 1);
         this.player2Group = new FrogGroup(this.scene, 2);
         this.groups = [this.player1Group, this.player2Group];
@@ -69,28 +84,16 @@ class BoardModel extends CGFobject {
 
 
     display() {
-        this.materials[1].apply();
         this.player1Group.display();
-        this.scene.pushMatrix()
-        this.scene.rotate(Math.PI, 0, 1, 0)
-        this.materials[2].apply();
         this.player2Group.display();
-        this.scene.popMatrix();
 
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[i].length; j++) {
-                let cell = this.board[i][j];
-                if (cell !== 0 && cell !== -1) {
+        for (let i = 0; i < this.frogs.length; i++) {
+            for (let j = 0; j < this.frogs[i].length; j++) {
+                let frog = this.frogs[i][j];
+                if (frog) {
                     let index = i * 8 + j + 1;
                     this.scene.registerForPick(index, [j, i]);
-                    this.scene.pushMatrix()
-                    this.scene.translate(-17.5 + 5 * j, 0, -17.5 + 5 * i);
-                    if (cell === 2) {
-                        this.scene.rotate(Math.PI, 0, 1, 0)
-                    }
-                    this.materials[cell].apply();
-                    this.scene.frogModel.display();
-                    this.scene.popMatrix();
+                    this.frogs[i][j].display();
                     this.scene.clearPickRegistration();
                 }
             }
