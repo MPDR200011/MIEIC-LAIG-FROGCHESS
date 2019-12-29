@@ -51,12 +51,16 @@ class BoardModel extends CGFobject {
     }
 
     placeFrog(player, x, y) {
-        let group = this.groups[player - 1];
+        let group = this.groups[player-1];
 
-        group.pieces.pop();
+        let frog = group.getTailFrog();
+
+        this.scene.animationController
+        .animateToTable(frog, x, y); 
 
         this.board[y][x] = player;
-        this.frogs[y][x] = new Frog(this.scene, this.getAbsoluteBoardCoords(x,y));
+        this.frogs[y][x] = frog;
+        group.removeTailFrog();
     }
 
     async initialize() {

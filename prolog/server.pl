@@ -126,8 +126,8 @@ parse_input(valid_move(_,_,[_,_,_,_]), 'false').
 
 parse_input(defaultBoard, B) :- defaultBoard(B).
 
-parse_input(choose_move(Board,Depth,Player,Move), Move):-choose_move(Board,Depth,Player,Move).
-parse_input(choose_move(_,_,_,_), false).
+parse_input(choose_move(Board,Depth,Player), Move):-choose_move(Board,Depth,Player,Move).
+parse_input(choose_move(_,_,_), false).
 
 parse_input(checkSwamp(Board, X , Y), 'true') :-
 	size(Board, R, C),
@@ -137,8 +137,8 @@ parse_input(checkSwamp(_, _, _), 'false').
 parse_input(game_over(Board, Player, OtherPlayer), Winner) :- game_over(Board, Player, OtherPlayer, Winner).
 parse_input(game_over(_, _, _), 'false').
 
-parse_input(place_frog(Board, Move), Move):- place_frog(Board,Move).
-parse_input(place_frog(_,_), false).
+parse_input(place_frog(Board), Move):- place_frog(Board,Move).
+parse_input(place_frog(_), false).
 
 parse_input(quit, goodbye).
 

@@ -162,6 +162,7 @@ class XMLscene extends CGFscene {
      */
     display() {
         this.logPicking();
+        this.controller.tick();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene

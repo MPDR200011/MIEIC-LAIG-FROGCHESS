@@ -13,6 +13,37 @@ class GameController {
         this.aiDifficulty = {"level 0" : 0, "level 1": 1};
         this.aiDifficultyIndex = 0;
 
+        this.playerKinds = [true, true];
+
+        this.inputQueue = [];
+    }
+
+    changeMode(mode) {
+        console.log(mode);
+        
+        switch(parseInt(mode)) {
+            case 0: {
+                this.playerKinds[0] = true;
+                this.playerKinds[1] = true;
+                break;
+            }
+            case 1: {
+                this.playerKinds[0] = true;
+                this.playerKinds[1] = false;
+                break;
+            }
+            case 2: {
+                this.playerKinds[0] = false;
+                this.playerKinds[1] = true;
+                break;
+            }
+            case 3: {
+                console.log(1);
+                this.playerKinds[0] = false;
+                this.playerKinds[1] = false;
+                break;
+            }
+        }
     }
 
     switchTurn() {
@@ -20,14 +51,6 @@ class GameController {
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1; 
 
         console.log("It is now player " + this.currentPlayer + " turn.");
-
-        if(this.isAIturn()){
-            console.log("ai turn")
-            this.waiting = true;
-            this.currentPhase.aiMove();
-            this.waiting = false;
-            console.log("end of ai turn")
-        }
     }
 
     switchPhase(newPhase) {
@@ -37,16 +60,16 @@ class GameController {
         console.log("switching phase: " + newPhase)
     }
 
-    async picked(coords) {
+    picked(coords) {
+        this.inputQueue.push(coords);
+    }
+
+    async tick() {
         if (this.waiting) {
             return;
         }
 
-        this.waiting = true;
-
-        await this.currentPhase.handlePick(coords);
-
-        this.waiting = false;
+        this.currentPhase.tick();
     }
 
     initialize() {
@@ -54,16 +77,7 @@ class GameController {
         this.switchPhase(new BuildingPhase(this));
         this.waiting = false;
     }
-
-    isAIturn(){
-        if(this.currentPlayer == 1){
-            return this.gameModeIndex == 2||this.gameModeIndex == 3
-        }
-        else return this.gameModeIndex == 1 || this.gameModeIndex ==3
-    }
-
     startGame(){
         
     }
-
 }

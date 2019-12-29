@@ -5,16 +5,11 @@ class GamePhase {
         this.state = controller.state;
     }
 
-    handlePick(coords) {
+    tick() {
         throw TypeError("Methdo handlePick() must be implemented.");
     }
 
     buildInterface(int) {
-    }
-
-    async aiMove(){
-        console.error("abstract class instanciated")
-        throw TypeError("Methdo handlePick() must be implemented.");
     }
 
     switchTurn() {}

@@ -55,7 +55,7 @@ class PlayingPhase extends GamePhase {
     async aiMove(){
         let board = this.state.board.board
         let aiLevel = this.controller.aiDifficultyIndex;
-        let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer},${'X'})`;
+        let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer})`;
 
         let response = await fetch(requestString, {
             method: 'GET'
@@ -65,12 +65,9 @@ class PlayingPhase extends GamePhase {
 
         console.warn("ai move: "+move);
         this.state.board.executeMove(this.controller.currentPlayer,move);
-        this.jumped= true
-        this.pickedPos = [move[2],move[3]]
+        this.jumped = true;
+        this.pickedPos = [move[2],move[3]];
         this.endTurn();
-        return null;
-
-
     }
 
     async checkConditions() {
@@ -92,37 +89,50 @@ class PlayingPhase extends GamePhase {
     }
 
     buildInterface(int) {
-        //int.resetControlsFolder();
-        let folder = int.controlsFolder;
-        folder.add(this, 'endTurn').name("End Turn");
+        int.gui.add(this, 'endTurn').name("End Turn");
     }
 
 
-    async handlePick(coords) {
-        if(this.controller.isAIturn === true){
-            console.log("yes it ai turn, ")
+    async tick() {
+        this.controller.waiting = true;
+        let currentPlayer = this.controller.currentPlayer;
+
+        if(!this.controller.playerKinds[currentPlayer-1]){
+            await this.aiMove();
+            this.controller.waiting = false;
             return;
         }
-        let currentPlayer = this.controller.currentPlayer;
+
+        const coords = this.controller.inputQueue[0];
+
+        if (!coords) {
+            this.controller.waiting = false;
+            return;
+        }
+        this.controller.inputQueue.splice(0,1);
 
         console.log(coords);
         let board = this.state.board.board;
         if (!this.pickedPos) {
             if (board[coords[1]][coords[0]] !== currentPlayer) {
-                return null;
+                this.controller.waiting = false;
+                return;
             }
 
             this.pickedPos = coords;
 
-            return null;
+            this.controller.waiting = false;
+            return;
         }
 
         if (board[coords[1]][coords[0]] === currentPlayer && !this.jump) {
             if (this.jumped) {
-                return null;
+                this.controller.waiting = false;
+                return;
             }
             this.pickedPos = coords;
-            return null;
+            this.controller.waiting = false;
+            return;
         }
 
         let move = [...this.pickedPos, ...coords];
@@ -135,14 +145,16 @@ class PlayingPhase extends GamePhase {
         })
 
         if (!await response.json()) {
-            return null;
+            this.controller.waiting = false;
+            return;
         } 
 
         this.state.board.executeMove(currentPlayer, move);
         this.jumped = true;
         this.pickedPos = coords;
 
-        return null;
+        this.controller.waiting = false;
+        return;
     }
 
 

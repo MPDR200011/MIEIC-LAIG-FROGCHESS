@@ -4,16 +4,17 @@ class BuildingPhase extends GamePhase {
     }
 
     async aiMove(){
-        
+
         let currentPlayer = this.controller.currentPlayer;
         let board = this.state.board.board
-        let requestString = `http://localhost:8081/place_frog(${JSON.stringify(board)},${'X'})`
+        let requestString = `http://localhost:8081/place_frog(${JSON.stringify(board)})`
         let response = await fetch(requestString, {
             method: 'GET'
         })
         let move = await response.json();
         let coords = move.map(x => x - 1);
         console.log("Placing at: "+coords)
+
         this.state.board.placeFrog(currentPlayer, coords[0], coords[1]);
 
         let boardString = JSON.stringify(this.state.board.board);
@@ -32,8 +33,25 @@ class BuildingPhase extends GamePhase {
     }
 
 
-    async handlePick(coords) {
+    async tick() {
+        this.controller.waiting = true;
         let currentPlayer = this.controller.currentPlayer;
+
+        let kind =this.controller.playerKinds[currentPlayer-1];
+         
+        if (!kind) {
+            await this.aiMove();
+            this.controller.waiting = false;
+            return;
+        }
+
+        let coords = this.controller.inputQueue[0];
+
+        if (!coords) {
+            this.controller.waiting = false;
+            return;
+        }
+        this.controller.inputQueue.splice(0,1);
 
         let boardString = JSON.stringify(this.state.board.board);
         let coordsString = JSON.stringify([coords[0]+1, coords[1]+1]);
@@ -47,20 +65,10 @@ class BuildingPhase extends GamePhase {
             const x = coords[0];
             const y = coords[1];
 
-            let board = this.state.board.board;
-            let frogs = this.state.board.frogs;
-            let group = this.state.board.groups[currentPlayer-1];
-
-            let frog = group.getTailFrog();
-
-            this.scene.animationController
-            .animateToTable(frog, x, y); 
-
-            board[y][x] = currentPlayer;
-            frogs[y][x] = frog;
-            group.removeTailFrog();
+            this.state.board.placeFrog(currentPlayer, x, y);
         } else {
             console.log('you idiot');
+            this.controller.waiting = false;
             return;
         }
 
@@ -73,11 +81,13 @@ class BuildingPhase extends GamePhase {
         if (await response.json()) {
             console.log("complete");
             this.controller.switchPhase(new PlayingPhase(this.controller));
+            this.controller.waiting = false;
             return;
         }
 
         this.controller.switchTurn();
 
+        this.controller.waiting = false;
         return;
     }
 }
