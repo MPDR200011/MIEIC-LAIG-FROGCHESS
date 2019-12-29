@@ -20,6 +20,13 @@ class GameController {
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1; 
 
         console.log("It is now player " + this.currentPlayer + " turn.");
+        console.log(this.isAIturn())
+        if(this.isAIturn()){
+            console.log("ai turn")
+            this.waiting = true;
+            this.currentPhase.aiMove();
+            this.waiting = false;
+        }
     }
 
     switchPhase(newPhase) {
@@ -47,8 +54,9 @@ class GameController {
     }
 
     isAIturn(){
-        if(this.currentPlayer === 1)
-            return this.gameModeIndex === 2||this.gameModeIndex === 3
-        else return this.gameModeIndex === 1 || this.gameModeIndex ===3
+        if(this.currentPlayer == 1){
+            return this.gameModeIndex == 2||this.gameModeIndex == 3
+        }
+        else return this.gameModeIndex == 1 || this.gameModeIndex ==3
     }
 }

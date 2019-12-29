@@ -42,7 +42,8 @@ class PlayingPhase extends GamePhase {
 
     }
 
-    async AiMove(){
+    async aiMove(){
+        console.warn("called")
         let board = this.state.board.board
         let aiLevel = this.controller.aiDifficultyIndex;
         let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer},${'X'})`;
@@ -53,7 +54,8 @@ class PlayingPhase extends GamePhase {
         let move = await response.json();
 
         console.warn(move);
-        this.state.board.executeMove(currentPlayer,move);
+        this.state.board.executeMove(this.controller.currentPlayer,move);
+        this.jumped= true
         this.endTurn();
         return null;
 

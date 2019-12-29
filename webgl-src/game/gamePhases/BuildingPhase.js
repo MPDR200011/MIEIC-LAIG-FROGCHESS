@@ -3,6 +3,11 @@ class BuildingPhase extends GamePhase {
         super(controller);
     }
 
+    aiMove(){
+        
+    }
+
+
     async handlePick(coords) {
         let currentPlayer = this.controller.currentPlayer;
 
