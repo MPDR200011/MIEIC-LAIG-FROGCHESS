@@ -137,6 +137,9 @@ parse_input(checkSwamp(_, _, _), 'false').
 parse_input(game_over(Board, Player, OtherPlayer), Winner) :- game_over(Board, Player, OtherPlayer, Winner).
 parse_input(game_over(_, _, _), 'false').
 
+parse_input(place_frog(Board, Move), Move):- place_frog(Board,Move).
+parse_input(place_frog(_,_), false).
+
 parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.

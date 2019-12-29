@@ -49,3 +49,10 @@ choose_move(Board,1,Player,Move):-
     max2(ValueList,Largest),
     nth1(Index,ValueList,Largest),
     nth1(Index, ListOfMoves, Move).
+
+
+place_frog(Board, Move):-
+    findall([Xi,Yi],cell(Board,Xi,Yi,0),EmptySpaces),
+    random_select(Move,EmptySpaces,_).
+
+

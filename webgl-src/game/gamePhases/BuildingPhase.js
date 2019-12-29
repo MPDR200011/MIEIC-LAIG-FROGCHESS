@@ -3,8 +3,32 @@ class BuildingPhase extends GamePhase {
         super(controller);
     }
 
-    aiMove(){
+    async aiMove(){
         
+        let currentPlayer = this.controller.currentPlayer;
+        let board = this.state.board.board
+        let requestString = `http://localhost:8081/place_frog(${JSON.stringify(board)},${'X'})`
+        let response = await fetch(requestString, {
+            method: 'GET'
+        })
+        let move = await response.json();
+        let coords = move.map(x => x - 1);
+        console.log("Placing at: "+coords)
+        this.state.board.placeFrog(currentPlayer, coords[0], coords[1]);
+
+        let boardString = JSON.stringify(this.state.board.board);
+        requestString = `http://localhost:8081/boardComplete(${boardString})`;
+        response = await fetch(requestString, {
+            method: 'GET',
+        });
+
+        if (await response.json()) {
+            console.log("complete");
+            this.controller.switchPhase(new PlayingPhase(this.controller));
+            return;
+        }
+        
+        this.controller.switchTurn();
     }
 
 

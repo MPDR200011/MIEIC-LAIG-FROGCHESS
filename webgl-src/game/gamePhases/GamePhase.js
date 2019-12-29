@@ -11,7 +11,7 @@ class GamePhase {
     buildInterface(int) {
     }
 
-    aiMove(){
+    async aiMove(){
         console.error("abstract class instanciated")
         throw TypeError("Methdo handlePick() must be implemented.");
     }
