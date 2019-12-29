@@ -43,7 +43,6 @@ class PlayingPhase extends GamePhase {
     }
 
     async aiMove(){
-        console.warn("called")
         let board = this.state.board.board
         let aiLevel = this.controller.aiDifficultyIndex;
         let requestString=`http://localhost:8081/choose_move(${JSON.stringify(board)},${aiLevel},${this.controller.currentPlayer},${'X'})`;
@@ -52,10 +51,12 @@ class PlayingPhase extends GamePhase {
             method: 'GET'
         })
         let move = await response.json();
+        move = move.map(x => x - 1);
 
-        console.warn(move);
+        console.warn("ai move: "+move);
         this.state.board.executeMove(this.controller.currentPlayer,move);
         this.jumped= true
+        this.pickedPos = [move[2],move[3]]
         this.endTurn();
         return null;
 
@@ -80,15 +81,18 @@ class PlayingPhase extends GamePhase {
     }
 
     buildInterface(int) {
-        int.resetControlsFolder();
+        //int.resetControlsFolder();
         let folder = int.controlsFolder;
         folder.add(this, 'endTurn');
     }
 
 
     async handlePick(coords) {
+        if(this.controller.isAIturn === true){
+            console.log("yes it ai turn, ")
+            return;
+        }
         let currentPlayer = this.controller.currentPlayer;
-
 
         console.log(coords);
         let board = this.state.board.board;

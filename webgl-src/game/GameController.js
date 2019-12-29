@@ -20,12 +20,13 @@ class GameController {
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1; 
 
         console.log("It is now player " + this.currentPlayer + " turn.");
-        console.log(this.isAIturn())
+
         if(this.isAIturn()){
             console.log("ai turn")
             this.waiting = true;
             this.currentPhase.aiMove();
             this.waiting = false;
+            console.log("end of ai turn")
         }
     }
 
@@ -33,6 +34,7 @@ class GameController {
         this.currentPlayer = 1;
         this.currentPhase = newPhase;
         this.currentPhase.buildInterface(this.scene.interface);
+        console.log("switching phase: " + newPhase)
     }
 
     async picked(coords) {
