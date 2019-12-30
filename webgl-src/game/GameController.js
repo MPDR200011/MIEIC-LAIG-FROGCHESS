@@ -14,6 +14,7 @@ class GameController {
         this.aiDifficultyIndex = 0;
 
         this.playerKinds = [true, true];
+        this.shouldRotateCam = true;
 
         this.inputQueue = [];
 
@@ -35,22 +36,29 @@ class GameController {
             case 0: {
                 this.playerKinds[0] = true;
                 this.playerKinds[1] = true;
+                this.scene.camera.setPosition([0,60,20]);
+                this.shouldRotateCam = true;
                 break;
             }
             case 1: {
                 this.playerKinds[0] = true;
                 this.playerKinds[1] = false;
+                this.scene.camera.setPosition([0,60,20]);
+                this.shouldRotateCam = false;
                 break;
             }
             case 2: {
                 this.playerKinds[0] = false;
                 this.playerKinds[1] = true;
+                this.scene.camera.setPosition([0,60,20]);
+                this.shouldRotateCam = false;
                 break;
             }
             case 3: {
-                console.log(1);
                 this.playerKinds[0] = false;
                 this.playerKinds[1] = false;
+                this.scene.camera.setPosition([20,60,0]);
+                this.shouldRotateCam = false;
                 break;
             }
         }
@@ -58,7 +66,11 @@ class GameController {
 
     switchTurn() {
         this.currentPhase.switchTurn();
-        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1; 
+        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+        this.inputQueue = [];
+        if (this.shouldRotateCam) {
+            this.scene.camAnimator.animateToPos(this.currentPlayer-1);
+        }
 
         console.log("It is now player " + this.currentPlayer + " turn.");
     }
@@ -67,6 +79,7 @@ class GameController {
         this.currentPlayer = 1;
         this.currentPhase = newPhase;
         this.currentPhase.buildInterface(this.scene.interface);
+        this.inputQueue = [];
         console.log("switching phase: " + newPhase)
     }
 

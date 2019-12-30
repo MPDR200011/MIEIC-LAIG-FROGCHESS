@@ -55,6 +55,7 @@ class XMLscene extends CGFscene {
 
         this.controller = new GameController(this, this.state);
         this.animationController = new AnimationController(this);
+        this.camAnimator = new CameraAnimator(this);
         this.materialDict = new MaterialDict(this);
 
         this.setPickEnabled(true);
@@ -67,6 +68,7 @@ class XMLscene extends CGFscene {
 
         this.controller.update(t);
         this.animationController.update(t);
+        this.camAnimator.update(t);
     }
 
     logPicking() {
@@ -144,7 +146,6 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
-        this.securityView = this.graph.activeView;
 
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
@@ -153,6 +154,7 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         this.interface.build(this.graph);
+        this.interface.setActiveCamera(null);
         this.controller.initialize();
 
         this.sceneInited = true;
