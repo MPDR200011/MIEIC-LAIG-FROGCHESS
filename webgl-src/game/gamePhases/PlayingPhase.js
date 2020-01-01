@@ -4,6 +4,8 @@ class PlayingPhase extends GamePhase {
 
         this.pickedPos = null;
         this.jumped = false;
+
+        this.stateQueue = [];
     }
 
     async checkSwamp(currentPlayer) {
@@ -46,6 +48,7 @@ class PlayingPhase extends GamePhase {
 
         this.pickedPos = null;
         this.jumped = false;
+        this.stateQueue = [];
 
     }
 
@@ -79,18 +82,29 @@ class PlayingPhase extends GamePhase {
         if (!this.jumped) {
             return;
         }
-
+        this.stateQueue = [];
         this.checkConditions();
 
         this.controller.switchTurn();
     }
 
+    undo() {
+        if (this.stateQueue.length < 1) {
+            return;
+        }
+
+        let savedState = this.stateQueue[this.stateQueue.length-1];
+        this.stateQueue.pop();
+        
+        this.state.board.resetState(savedState);
+    }
+
     buildInterface(int) {
         int.gui.destroy();
         int.gui = new dat.GUI();
+        int.gui.add(this, 'undo').name('Undo');
         int.gui.add(this, 'endTurn').name("End Turn");
     }
-
 
     async tick() {
         this.controller.waiting = true;
@@ -153,6 +167,7 @@ class PlayingPhase extends GamePhase {
             return;
         } 
 
+        this.stateQueue.push(new SavedState(this.state));
         this.state.board.executeMove(currentPlayer, move);
         this.jumped = true;
         this.pickedPos = coords;

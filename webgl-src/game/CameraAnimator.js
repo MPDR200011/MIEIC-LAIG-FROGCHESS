@@ -24,6 +24,11 @@ class CameraAnimator {
         this.angleIncrement = 0;
     }
 
+    setPosition(pos) {
+        this.scene.camera.setPosition(this.positions[pos]);
+        this.currentAngle = this.angles[pos];
+    }
+
     animateToPos(i) {
         if (i < 0 || i > 2) {
             return;
@@ -46,7 +51,6 @@ class CameraAnimator {
         const dT = t - this.lastTime;
         
         const tT = t - this.startTime;
-        console.log(tT);
 
         this.lastTime = t;
 

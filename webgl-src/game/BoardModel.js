@@ -9,6 +9,40 @@ class BoardModel extends CGFobject {
         this.groups = [this.player1Group, this.player2Group];
     }
 
+    resetState(savedState) {
+        this.board = savedState.board;
+
+        this.frogs = savedState.frogs.map(arr => 
+            arr.map(info => {
+                if (info === null) {
+                    return null;
+                }
+
+                let frog = this.scene.frogsDict.frogs[info[0]];
+                frog.pos = info[1];
+
+                return frog;
+            })
+        );
+
+        this.player1Group.pieces = savedState.player1Tray.map(info => {
+            let frog = this.scene.frogsDict.frogs[info[0]];
+            frog.pos = info[1];
+            return frog;
+        });
+
+        this.player2Group.pieces = savedState.player2Tray.map(info => {
+            let frog = this.scene.frogsDict.frogs[info[0]];
+            frog.pos = info[1];
+            return frog;
+        });
+        
+        console.log(this.board);
+        console.log(this.frogs);
+        console.log(this.player1Group.pieces);
+        console.log(this.player2Group.pieces);
+    }
+
     getAbsoluteBoardCoords(x, y) {
         return [-17.5 + 5 * x, 0, -17.5 + 5 * y];
     }

@@ -49,6 +49,7 @@ class XMLscene extends CGFscene {
 
         this.setActiveShader(this.shaders[this.shaderIndex]);
 
+        this.frogsDict = new FrogDictionary();
         this.frogModel = new CGFOBJModel(this,"scenes/models/Frog.obj");
         this.state = new GameState(this);
         this.state.initialize();

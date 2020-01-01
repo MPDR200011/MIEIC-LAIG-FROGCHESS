@@ -77,6 +77,7 @@ class GameController {
 
     switchPhase(newPhase) {
         this.currentPlayer = 1;
+        this.scene.camAnimator.animateToPos(this.currentPlayer-1);
         this.currentPhase = newPhase;
         this.currentPhase.buildInterface(this.scene.interface);
         this.inputQueue = [];

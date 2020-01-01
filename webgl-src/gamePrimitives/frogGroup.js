@@ -4,7 +4,9 @@ class FrogGroup extends CGFobject {
         this.pieces = [];
         this.offset = player === 1 ? 28 : -23;
         for (let i = 0; i < 18; i++) {
-            this.pieces.push(new Frog(scene, this.getAbsolutePositionAtIndex(i), player, `${player}${i}`) );
+            let frog = new Frog(scene, this.getAbsolutePositionAtIndex(i), player, `${player}${i}`);
+            this.pieces.push(frog);
+            this.scene.frogsDict.addFrog(frog)
         }
     }
 
