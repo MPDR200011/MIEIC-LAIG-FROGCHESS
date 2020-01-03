@@ -16,7 +16,7 @@ class CameraAnimator {
             [20,60,0]
         ];
 
-        this.transitionTime = 0.3;
+        this.transitionTime = 0.5;
         this.lastTime = 0;
         this.startTime = null;
 

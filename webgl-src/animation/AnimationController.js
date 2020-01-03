@@ -3,6 +3,7 @@ class AnimationController {
         this.animations = {};
         this.scene = scene;
         this.state = scene.state;
+        this.gamesequence = new GameSequence();
     }
 
     addAnimation(animation) {
@@ -10,7 +11,7 @@ class AnimationController {
             this.animations[animation.frog.id] = [];
         }
         this.animations[animation.frog.id].push(animation);
-
+        this.gamesequence.addMove(animation);
         return animation;
     }
 
