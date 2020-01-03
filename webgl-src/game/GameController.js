@@ -27,10 +27,11 @@ class GameController {
             this.botThreshold = t + 2000;
         }
         this.currentTime = t;
+        if (this.currentPhase)
+            this.currentPhase.update(t);
     }
 
     changeMode(mode) {
-        console.log(mode);
         
         switch(parseInt(mode)) {
             case 0: {
@@ -76,12 +77,16 @@ class GameController {
     }
 
     switchPhase(newPhase) {
+        if (this.currentPhase) {
+            this.currentPhase.destroy();
+        }
         this.currentPlayer = 1;
-        this.scene.camAnimator.animateToPos(this.currentPlayer-1);
+        if (this.gameModeIndex !== '3') {
+            this.scene.camAnimator.animateToPos(this.currentPlayer-1);
+        }
         this.currentPhase = newPhase;
         this.currentPhase.buildInterface(this.scene.interface);
         this.inputQueue = [];
-        console.log("switching phase: " + newPhase)
     }
 
     picked(coords) {

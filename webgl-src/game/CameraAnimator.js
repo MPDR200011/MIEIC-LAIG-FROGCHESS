@@ -30,6 +30,8 @@ class CameraAnimator {
     }
 
     animateToPos(i) {
+        console.log('animating to pos ' + i);
+        
         if (i < 0 || i > 2) {
             return;
         }
