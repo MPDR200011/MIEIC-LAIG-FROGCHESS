@@ -5,6 +5,8 @@ class GamePhase {
         this.state = controller.state;
     }
 
+    update(t) {}
+
     tick() {
     }
 
@@ -12,6 +14,8 @@ class GamePhase {
         int.gui.destroy();
         int.gui = new dat.GUI();
     }
+
+    destroy() {}
 
     switchTurn() {}
 }
