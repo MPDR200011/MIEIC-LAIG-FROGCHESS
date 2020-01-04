@@ -49,6 +49,8 @@ serialInclude(['../lib/CGF.js',
 'game/MaterialDict.js',
 'animation/FrogMovement.js',
 'animation/AnimationController.js',
+'game/GameSequence.js',
+'game/Animator.js',
 main=function()
 {
 	// Standard application, scene and interface setup

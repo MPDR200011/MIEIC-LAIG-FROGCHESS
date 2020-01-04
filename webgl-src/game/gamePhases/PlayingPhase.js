@@ -53,10 +53,10 @@ class PlayingPhase extends GamePhase {
         let result = await response.json();
 
         if (result) {
+            this.controller.createAnimator();
             this.controller.switchPhase(new GameOverPhase(this.controller, result));
         }
 
-        this.controller.createAnimator();
 
         this.pickedPos = null;
         this.jumped = false;

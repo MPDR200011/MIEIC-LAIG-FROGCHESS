@@ -15,6 +15,8 @@ class FrogMovement {
 
     start() {
         this.animating = true;
+        this.finished = false;
+        this.startTime = null;
     }
 
     stop() {

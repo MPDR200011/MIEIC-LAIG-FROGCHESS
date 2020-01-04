@@ -1,6 +1,6 @@
 class GameSequence {
     constructor() {
-        this.sequence = []
+        this.sequence = [];
     }
 
     addMove(move) {
