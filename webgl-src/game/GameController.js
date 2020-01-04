@@ -107,4 +107,11 @@ class GameController {
         this.waiting = false;
     }
 
+    createAnimator(){
+        this.animator = new Animator(this,this.scene.animationController.gameSequence)
+    }
+    replay(){
+        this.animator.start();
+    }
+
 }

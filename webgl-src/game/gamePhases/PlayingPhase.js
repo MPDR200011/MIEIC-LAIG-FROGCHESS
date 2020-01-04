@@ -56,6 +56,8 @@ class PlayingPhase extends GamePhase {
             this.controller.switchPhase(new GameOverPhase(this.controller, result));
         }
 
+        this.controller.createAnimator();
+
         this.pickedPos = null;
         this.jumped = false;
         this.stateQueue = [];

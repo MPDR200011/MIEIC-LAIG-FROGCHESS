@@ -10,7 +10,13 @@ class GameOverPhase extends GamePhase {
         int.gui = new dat.GUI();
 
         int.gui.add(this, 'foo').name("Player " + this.winner + ' Won!!!!!');
+        int.gui.add(this,'replay').name("Replay")
     }
 
     foo(){}
+    replay(){
+        this.controller.state.board.initialize();
+
+
+    }
 }
