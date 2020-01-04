@@ -118,8 +118,27 @@ class BoardModel extends CGFobject {
         this.player1Group = new FrogGroup(this.scene, 1);
         this.player2Group = new FrogGroup(this.scene, 2);
         this.groups = [this.player1Group, this.player2Group];
+
+
+
     }
 
+    async reset(){
+        let response = await fetch(this.serverURL + 'defaultBoard', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+        });
+
+        this.board = await response.json();
+
+        this.player1Group.reset();
+        this.player2Group.reset();
+      
+    }
 
     display() {
         this.player1Group.display();
@@ -139,4 +158,5 @@ class BoardModel extends CGFobject {
 
     }
 
+    
 }

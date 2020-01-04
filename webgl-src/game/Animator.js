@@ -10,6 +10,7 @@ class Animator {
     start() {
         this.pointer = 0;
         console.log(this.gameSequence)
+        this.gameSequence.final = true;
     }
 
     update(t) {
@@ -29,9 +30,9 @@ class Animator {
     }
 
     pushNextAnimation() {
-        console.log(this.gameSequence.sequence[this.pointer])
         this.controller.scene.animationController.addAnimation(this.gameSequence.sequence[this.pointer]);
         this.gameSequence.sequence[this.pointer].start();
+        console.log(this.gameSequence.sequence[this.pointer])
     }
 
 }

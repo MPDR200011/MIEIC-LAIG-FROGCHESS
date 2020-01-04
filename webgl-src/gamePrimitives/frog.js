@@ -4,11 +4,16 @@ class Frog extends CGFobject{
         this.id = id;
         this.frog = this.scene.frogModel;
         this.pos = pos;
+        this.initialCoords = pos;
         this.player = player;
     }
 
     updateScaleFactors(){
         return;
+    }
+
+    reset(){
+        this.pos = this.initialCoords;
     }
     
     display(){

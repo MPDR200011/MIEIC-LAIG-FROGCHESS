@@ -16,22 +16,29 @@ class FrogGroup extends CGFobject {
         }
     }
 
+    reset() {
+        console.log(this.pieces);
+        for (let i = 0; i < 18; i++) {
+            this.pieces[i].reset();
+        }
+    }
+
     getNextPosition() {
         return this.getAbsolutePositionAtIndex(this.pieces.length);
     }
 
     getAbsolutePositionAtIndex(i) {
-        let x = Math.floor(i/2);
+        let x = Math.floor(i / 2);
         let y = i % 2;
         return [-20 + 5 * x, 0.8, this.offset - 5 * y];
     }
 
     getTailFrog() {
-        return this.pieces[this.pieces.length-1];
+        return this.pieces[this.pieces.length - 1];
     }
 
     removeTailFrog() {
-        this.pieces.splice(this.pieces.length-1, 1);
+        this.pieces.splice(this.pieces.length - 1, 1);
     }
 
     display() {

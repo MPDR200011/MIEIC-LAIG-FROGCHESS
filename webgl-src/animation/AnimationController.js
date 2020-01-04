@@ -11,7 +11,9 @@ class AnimationController {
             this.animations[animation.frog.id] = [];
         }
         this.animations[animation.frog.id].push(animation);
+        if(!this.gameSequence.final){
         this.gameSequence.addMove(animation);
+        }
         return animation;
     }
 
@@ -54,7 +56,6 @@ class AnimationController {
             let animation = this.animations[frog][0];
             if (animation) {
                 animation.update(t);
-
                 this.animations[frog] = this.animations[frog].filter(animation => !animation.finished);
             }
         });
