@@ -2,10 +2,12 @@ class FrogGroup extends CGFobject {
     constructor(scene, player) {
         super(scene);
         this.pieces = [];
+        this.backup = [];
         this.offset = player === 1 ? 28 : -23;
         for (let i = 0; i < 18; i++) {
             let frog = new Frog(scene, this.getAbsolutePositionAtIndex(i), player, `${player}${i}`);
             this.pieces.push(frog);
+            this.backup.push(frog);
             this.scene.frogsDict.addFrog(frog)
         }
     }
@@ -17,7 +19,8 @@ class FrogGroup extends CGFobject {
     }
 
     reset() {
-        console.log(this.pieces);
+        this.pieces = this.backup;
+        console.log(this.pieces)
         for (let i = 0; i < 18; i++) {
             this.pieces[i].reset();
         }
