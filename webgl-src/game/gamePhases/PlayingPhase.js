@@ -136,6 +136,7 @@ class PlayingPhase extends GamePhase {
         let elem = this.timeElements[currentPlayer - 1];
         this.times[currentPlayer-1] -= t - this.lastTime;
         if (this.times[currentPlayer-1] <= 0) {
+            this.controller.createAnimator();
             this.controller.switchPhase(new GameOverPhase(this.controller, currentPlayer === 1 ? 2 : 1));
         }
         elem.innerHTML = 'Player ' + currentPlayer + " Time: " + this.formatTime(Math.floor(this.times[currentPlayer-1]/1000));

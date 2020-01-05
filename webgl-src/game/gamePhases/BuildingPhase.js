@@ -72,7 +72,6 @@ class BuildingPhase extends GamePhase {
 
             this.state.board.placeFrog(currentPlayer, x, y);
         } else {
-            console.log('you idiot');
             this.controller.waiting = false;
             return;
         }

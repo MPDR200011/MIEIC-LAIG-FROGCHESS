@@ -11,11 +11,11 @@ class Animator {
         this.pointer = 0;
         console.log(this.gameSequence)
         this.gameSequence.final = true;
+        this.pushNextAnimation();
     }
 
     update(t) {
         if (this.pointer != -1) {
-            console.log("animating: " + this.pointer)
             if (this.startTime === null) {
                 this.startTime = t;
             }
