@@ -6,6 +6,10 @@ class SetupPhase extends GamePhase {
     startGame(){
         this.controller.switchPhase(new BuildingPhase(this.controller));
     }
+
+    toFreeCam() {
+        this.controller.switchPhase(new FreeCam(this.controller));
+    }
     
     buildInterface(int) {
         int.gui.destroy();
@@ -17,6 +21,7 @@ class SetupPhase extends GamePhase {
 
         int.gui.add(this.scene.controller,'aiDifficultyIndex',this.scene.controller.aiDifficulty)
         .name("Ai Difficulty: ");
+        int.gui.add(this,'toFreeCam').name("Free Cam");
         int.gui.add(this,'startGame').name("Start Game");
     }
 }
