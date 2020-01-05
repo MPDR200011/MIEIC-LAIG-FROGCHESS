@@ -1,19 +1,31 @@
 class SetupPhase extends GamePhase {
     constructor(controller) {
         super(controller);
+
+        this.sceneName = 'board.xml';
     }
 
     startGame(){
+        if (!this.scene.sceneInited) {
+            return;
+        }
         this.controller.switchPhase(new BuildingPhase(this.controller));
     }
 
     toFreeCam() {
         this.controller.switchPhase(new FreeCam(this.controller));
     }
+
+    changeScene(scene) {
+        this.scene.sceneInited = false;
+        this.scene.graph.reader.open('scenes/'+scene, this.scene.graph);
+    }
     
     buildInterface(int) {
         int.gui.destroy();
         int.gui = new dat.GUI();
+
+        int.gui.add(this, 'sceneName', {'Scene 1':'board.xml', 'Scene 2':'board2.xml'}).onChange(this.changeScene.bind(this));
         
         int.gui.add(this.scene.controller,'gameModeIndex',this.scene.controller.gameMode)
         .name("Game Mode: ")

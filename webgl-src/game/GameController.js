@@ -102,8 +102,12 @@ class GameController {
     }
 
     initialize() {
+        this.waiting = true;
         this.board = this.scene.graph.primitives['boardPiece'];
-        this.switchPhase(new SetupPhase(this));
+        if (!this.started) {
+            this.switchPhase(new SetupPhase(this));
+        }
+        this.started = true;
         this.waiting = false;
     }
 
