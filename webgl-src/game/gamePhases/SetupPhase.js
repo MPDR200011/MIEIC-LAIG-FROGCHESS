@@ -25,7 +25,7 @@ class SetupPhase extends GamePhase {
         int.gui.destroy();
         int.gui = new dat.GUI();
 
-        int.gui.add(this, 'sceneName', {'Scene 1':'board.xml', 'Scene 2':'board2.xml'}).onChange(this.changeScene.bind(this));
+        int.gui.add(this, 'sceneName', {'Scene 1':'board.xml', 'Scene 2':'board2.xml'}).onChange(this.changeScene.bind(this)).name("Scene: ");
         
         int.gui.add(this.scene.controller,'gameModeIndex',this.scene.controller.gameMode)
         .name("Game Mode: ")
