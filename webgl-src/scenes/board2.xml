@@ -122,23 +122,14 @@
         <primitive id="stoneHead">
             <stoneHead />
         </primitive>
+        <primitive id="totem">
+            <totem/>
+        </primitive>
     </primitives>
 
 
     <components>
 
-        <component id="grass">
-            <transformation>
-                <rotate axis="x" angle="90" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="boardTex" length_s="1" length_t="1" />
-            <children>
-                <primitiveref id = "demoRectangle" />
-            </children>
-        </component>
 
         <component id="tableTop">
             <transformation>
@@ -154,7 +145,7 @@
             </children>
          </component>
        
-         <component id="statue">
+         <component id="statueUR">
             <transformation>
                 <translate x="28" y="0" z="-25"/>
                 <scale x="0.05" y="0.05" z="0.05" />
@@ -162,15 +153,109 @@
                 <rotate axis="x" angle="-90"/>
             </transformation>
             <materials>
-                <material id="glass" />
+                <material id="inherit" />
             </materials>
             <texture id="stone" length_s="1" length_t="1" />
             <children>
                 <primitiveref id = "stoneHead"/>
             </children>
          </component>
+
+         <component id="statueUL">
+            <transformation>
+                <translate x="-28" y="0" z="-25"/>
+                <scale x="0.05" y="0.05" z="0.05" />
+                <rotate axis="y" angle="45" />
+                <rotate axis="x" angle="-90"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "stoneHead"/>
+            </children>
+        </component>
+         <component id="statueDL">
+            <transformation>
+                <translate x="-28" y="0" z="25"/>
+                <scale x="0.05" y="0.05" z="0.05" />
+                <rotate axis="y" angle="135" />
+                <rotate axis="x" angle="-90"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "stoneHead"/>
+            </children>
+         </component>
+
+         <component id="statueDR">
+            <transformation>
+                <translate x="28" y="0" z="25"/>
+                <scale x="0.05" y="0.05" z="0.05" />
+                <rotate axis="y" angle="-135" />
+                <rotate axis="x" angle="-90"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "stoneHead"/>
+            </children>
+         </component>
+
+
+         <component id="totemL">
+            <transformation>
+                <translate x="-28" y="0" z="3"/>
+                <rotate axis="y" angle="90" />
+                <rotate axis="x" angle="-90"/>
+                <scale x="0.05" y="0.05" z="0.05" />
+            </transformation>
+            <materials>
+                <material id="glass" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "totem"/>
+            </children>
+         </component>
+         <component id="totemR">
+            <transformation>
+                <translate x="28" y="0" z="-3"/>
+                <rotate axis="y" angle="-90" />
+                <rotate axis="x" angle="-90"/>
+                <scale x="0.05" y="0.05" z="0.05" />
+            </transformation>
+            <materials>
+                <material id="glass" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "totem"/>
+            </children>
+         </component>
         
 
+         <component id="cornerStatues">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="glass" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <componentref id="statueDR"/>
+                <componentref id="statueDL"/>
+                <componentref id="statueUR"/>
+                <componentref id="statueUL"/>
+            </children>
+         </component>
+         
 
         <component id="demoRoot">
             <transformation>
@@ -183,7 +268,9 @@
             <children>
                 <primitiveref id = "boardPiece"/>
                 <componentref id="tableTop"/>
-                <componentref id="statue"/>
+                <componentref id="cornerStatues"/>
+                <componentref id="totemL"/>
+                <componentref id="totemR"/>
             </children>
         </component>
     </components>
