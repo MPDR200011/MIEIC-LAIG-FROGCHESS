@@ -1,0 +1,145 @@
+<lxs>
+    <scene root="demoRoot" axis_length="5" />
+
+    <views default="greenPlayer">
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="0" y="60" z="1" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+
+        <perspective id="greenPlayer" near="0.1" far="500" angle="45">
+            <from x="0" y="60" z="20" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+
+        <perspective id="redPlayer" near="0.1" far="500" angle="45">
+            <from x="0" y="60" z="-20" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+    </views>
+
+    <globals>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />
+    </globals>
+
+    <lights>
+        <omni id="demoLight" enabled="1">
+            <location x="0" y="12" z="10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
+        <omni id="demoLight2" enabled="1">
+            <location x="0" y="12" z="-10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
+    </lights>
+
+    <textures>
+        <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
+        <texture id="boardTex" file="scenes/images/marbleBoard.jpg" />
+        <texture id="darkMarble" file="scenes/images/darkMarble.jpg" />
+        <texture id="wood" file = "scenes/images/tableWood.jpg"/>
+        <texture id="crystal" file="scenes/images/crystal.jpg" />
+        <texture id="carpet" file="scenes/images/carpet.jpg"/>
+    </textures>
+
+    <materials>
+        <material id="demoMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </material>
+
+        <material id="frogMaterial1" shininess="10">
+            <emission r="0.0" g="0.0" b="0" a="1.0" />
+            <ambient r="0" g="1.0" b="0" a="1.0" />
+            <diffuse r="0" g="1.0" b="0" a="1.0" />
+            <specular r="0" g="1.0" b="0" a="1.0" />
+        </material>
+        <material id="frogMaterial2" shininess="10">
+            <emission r="0.0" g="0.0" b="0" a="1.0" />
+            <ambient r="1" g="1.0" b="0" a="1.0" />
+            <diffuse r="1" g="1.0" b="0" a="1.0" />
+            <specular r="1" g="1.0" b="0" a="1.0" />
+        </material>
+    </materials>
+
+    <transformations>
+    </transformations>
+
+    <animations>
+    </animations>
+
+    <primitives>
+        <primitive id="demoRectangle">
+            <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" />
+        </primitive>
+
+        <primitive id="cylinder2">
+            <cylinder2 base="0.3" top="0.1" height="1" slices="20" stacks="10" />
+        </primitive>
+
+        <primitive id="cone">
+            <cylinder2 base="0.3" top="0.1" height="1" slices="20" stacks="10" />
+        </primitive>
+
+        <primitive id="nurbsPlane">
+            <plane npartsU="20" npartsV="20" />
+        </primitive>
+        <primitive id="demoSphere">
+            <sphere radius="1" stacks="20" slices="30" />
+        </primitive>
+        <primitive id="unitSquare">
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+        </primitive>
+        <primitive id="boardPiece">
+            <board />
+        </primitive>
+        <primitive id="unitCube">
+            <unitCube />
+        </primitive>
+        <primitive id="frogPlayer1">
+            <frogGroup player ="1" />
+        </primitive>
+        <primitive id="frogPlayer2">
+            <frogGroup player ="2" />
+        </primitive>
+    </primitives>
+
+
+    <components>
+
+        <component id="grass">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="boardTex" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "demoRectangle" />
+            </children>
+        </component>
+       
+
+
+        <component id="demoRoot">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="boardTex" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id = "demoRectangle" />
+            </children>
+        </component>
+    </components>
+</lxs>
