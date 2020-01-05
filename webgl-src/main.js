@@ -51,6 +51,7 @@ serialInclude(['../lib/CGF.js',
 'animation/AnimationController.js',
 'game/GameSequence.js',
 'game/Animator.js',
+'gamePrimitives/StoneHead.js',
 main=function()
 {
 	// Standard application, scene and interface setup

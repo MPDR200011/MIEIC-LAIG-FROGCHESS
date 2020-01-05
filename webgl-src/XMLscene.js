@@ -51,6 +51,7 @@ class XMLscene extends CGFscene {
 
         this.frogsDict = new FrogDictionary();
         this.frogModel = new CGFOBJModel(this,"scenes/models/Frog.obj");
+        this.stoneHead = new CGFOBJModel(this,"scenes/models/StoneHead.obj");
         this.state = new GameState(this);
         this.state.initialize();
 
