@@ -2,7 +2,6 @@ class SetupPhase extends GamePhase {
     constructor(controller) {
         super(controller);
 
-        this.sceneName = 'board.xml';
     }
 
     startGame(){
@@ -25,7 +24,7 @@ class SetupPhase extends GamePhase {
         int.gui.destroy();
         int.gui = new dat.GUI();
 
-        int.gui.add(this, 'sceneName', {'Scene 1':'board.xml', 'Scene 2':'board2.xml'}).onChange(this.changeScene.bind(this));
+        int.gui.add(this.scene, 'sceneName', this.scene.sceneMapper).onChange(this.changeScene.bind(this));
         
         int.gui.add(this.scene.controller,'gameModeIndex',this.scene.controller.gameMode)
         .name("Game Mode: ")

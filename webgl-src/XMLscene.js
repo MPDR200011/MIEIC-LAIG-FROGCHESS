@@ -57,6 +57,9 @@ class XMLscene extends CGFscene {
         this.state = new GameState(this);
         this.state.initialize();
 
+        this.sceneName = 'board.xml';
+        this.sceneMapper = {'Scene 1':'board.xml', 'Scene 2':'board2.xml'};
+
         this.controller = new GameController(this, this.state);
         this.animationController = new AnimationController(this);
         this.camAnimator = new CameraAnimator(this);
