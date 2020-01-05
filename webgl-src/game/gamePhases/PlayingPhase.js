@@ -6,6 +6,7 @@ class PlayingPhase extends GamePhase {
         this.jumped = false;
 
         this.stateQueue = [];
+        this.posQueue = [];
 
 
         this.lastTime = null;
@@ -108,7 +109,9 @@ class PlayingPhase extends GamePhase {
 
         let savedState = this.stateQueue[this.stateQueue.length-1];
         this.stateQueue.pop();
-        
+        let pos = this.posQueue[this.posQueue.length-1];
+        this.posQueue.pop();
+        this.pickedPos = pos;
         this.state.board.resetState(savedState);
     }
 
@@ -135,7 +138,7 @@ class PlayingPhase extends GamePhase {
         if (this.times[currentPlayer-1] <= 0) {
             this.controller.switchPhase(new GameOverPhase(this.controller, currentPlayer === 1 ? 2 : 1));
         }
-        elem.innerHTML = 'Player ' + currentPlayer + " time: " + this.formatTime(Math.floor(this.times[currentPlayer-1]/1000));
+        elem.innerHTML = 'Player ' + currentPlayer + " Time: " + this.formatTime(Math.floor(this.times[currentPlayer-1]/1000));
 
         this.lastTime = t;
 
@@ -165,11 +168,11 @@ class PlayingPhase extends GamePhase {
         this.scoreElements = [this.player1ScoreElement, this.player2ScoreElement];
 
         this.player1TimeElement = document.createElement('p');
-        this.player1TimeElement.innerHTML = 'Player 1 Time: ' + Math.floor(this.player1Time / 1000);
+        this.player1TimeElement.innerHTML = 'Player 1 Time: ' + this.formatTime(Math.floor(this.player1Time / 1000));
         this.scoreboard.appendChild(this.player1TimeElement);
 
         this.player2TimeElement = document.createElement('p');
-        this.player2TimeElement.innerHTML = 'Player 2 Time: ' + Math.floor(this.player2Time / 1000);
+        this.player2TimeElement.innerHTML = 'Player 2 Time: ' + this.formatTime(Math.floor(this.player2Time / 1000));
         this.scoreboard.appendChild(this.player2TimeElement);
 
         this.timeElements = [this.player1TimeElement, this.player2TimeElement];
@@ -200,7 +203,6 @@ class PlayingPhase extends GamePhase {
         }
         this.controller.inputQueue.splice(0,1);
 
-        console.log(coords);
         let board = this.state.board.board;
         if (!this.pickedPos) {
             if (board[coords[1]][coords[0]] !== currentPlayer) {
@@ -225,7 +227,6 @@ class PlayingPhase extends GamePhase {
         }
 
         let move = [...this.pickedPos, ...coords];
-        console.log(move);
         let reqMove = move.map(x => x + 1);
         let requestString = 
         `http://localhost:8081/valid_move(${currentPlayer},${JSON.stringify(board)},${JSON.stringify(reqMove)})`;
@@ -239,6 +240,7 @@ class PlayingPhase extends GamePhase {
         } 
 
         this.stateQueue.push(new SavedState(this.state));
+        this.posQueue.push(this.pickedPos);
         this.state.board.executeMove(currentPlayer, move);
         this.updateScores();
         this.jumped = true;

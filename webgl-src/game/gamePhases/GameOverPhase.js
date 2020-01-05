@@ -24,6 +24,8 @@ class GameOverPhase extends GamePhase {
         if (this.controller.animator === null) {
             return
         }
-        this.controller.animator.update(t);
+        if (this.controller.animator) {
+            this.controller.animator.update(t);
+        }
     }
 }
