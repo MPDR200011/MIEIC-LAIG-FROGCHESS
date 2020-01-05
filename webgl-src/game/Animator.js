@@ -9,6 +9,7 @@ class Animator {
 
     start() {
         this.pointer = 0;
+        this.startTime = null;
         console.log(this.gameSequence)
         this.gameSequence.final = true;
         this.pushNextAnimation();
@@ -23,6 +24,11 @@ class Animator {
 
             if (dT >= 1500) {
                 this.pointer++;
+                if (this.pointer >= this.gameSequence.sequence.length) {
+                    this.pointer = -1;
+                    this.startTime = null;
+                    return;
+                }
                 this.startTime = t;
                 this.pushNextAnimation();
             }
