@@ -14,6 +14,8 @@ class GameOverPhase extends GamePhase {
     }
 
     foo() {}
+
+    //responsible for starting the animator to replay the game
     replay() {
         this.controller.state.board.reset();
         this.controller.animator.start();
