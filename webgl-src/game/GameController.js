@@ -1,8 +1,17 @@
+/**
+ * Class responsible for managing the game state.
+ */
 class GameController {
     constructor(scene, state) {
         this.scene = scene;
+
+        //Instance of a inheriting class of GamePhase
+        this.currentPhase = null;
     
         this.currentPlayer = 1;
+
+        // Variable that is set to true when game is running asynchronous work
+        // that is affecting the state
         this.waiting = true;
 
         this.state = state;
@@ -13,9 +22,14 @@ class GameController {
         this.aiDifficulty = {"level 0" : 0, "level 1": 1};
         this.aiDifficultyIndex = 0;
 
+        // Array to keep track of the type of each player
+        // true means the palyer is a human
+        // false means the player is a bot
+        // player 1 is in index 0 and player 2 is in index 1
         this.playerKinds = [true, true];
         this.shouldRotateCam = true;
 
+        // Queue to where the user input is stored
         this.inputQueue = [];
 
         this.currentTime = 0;
@@ -32,7 +46,6 @@ class GameController {
     }
 
     changeMode(mode) {
-        
         switch(parseInt(mode)) {
             case 0: {
                 this.playerKinds[0] = true;
@@ -66,7 +79,6 @@ class GameController {
     }
 
     switchTurn() {
-        this.currentPhase.switchTurn();
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         this.inputQueue = [];
         if (this.shouldRotateCam) {
@@ -93,6 +105,7 @@ class GameController {
         this.inputQueue.push(coords);
     }
 
+    // Called everyframe to manage the game state
     async tick() {
         if (this.waiting) {
             return;

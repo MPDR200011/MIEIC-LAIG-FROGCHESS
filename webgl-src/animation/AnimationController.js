@@ -1,3 +1,12 @@
+/**
+ * Class to manage the animations from the FrogMovement class
+ * 
+ * Mostly keeps things consistent, by queueing animations per frog
+ * so cases where the frog teleports to a location mid animation and 
+ * start another animation happen.
+ * 
+ * Alse keeps a GameSequence instance to build the game replay.
+ */
 class AnimationController {
     constructor(scene) {
         this.animations = {};

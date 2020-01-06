@@ -1,3 +1,6 @@
+/**
+ * Class to store a copy of a game state for the undo feature
+ */
 class SavedState {
     constructor(state) {
         this.board = state.board.board.map(arr => arr.slice());
