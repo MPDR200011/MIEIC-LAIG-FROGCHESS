@@ -15,6 +15,7 @@ class AnimationController {
         this.gameSequence = new GameSequence();
     }
 
+    // Adds an animation to the queue of the animations frog
     addAnimation(animation) {
         if (!this.animations[animation.frog.id]) {
             this.animations[animation.frog.id] = [];
@@ -26,6 +27,8 @@ class AnimationController {
         return animation;
     }
 
+    // Creates an animation that animates the give frog
+    // to the given coordinates on the game board
     animateToTable(frog, x, y) {
         let dest = this.state.board.getAbsoluteBoardCoords(x, y);
 
@@ -34,6 +37,7 @@ class AnimationController {
         animation.start();
     }
 
+    // Creates an animation that moves a frog between to position in the board
     animateInBoard(x1, y1, x2, y2) {
         let board = this.state.board;
         let movedFrog = board.frogs[y1][x1];
@@ -42,6 +46,8 @@ class AnimationController {
         moveAnimation.start();
     }
 
+    // Creates an animation that moves a frog from the table to the
+    // specified player's tray
     animateFromTableToTray(frog, player) {
         let model = this.state.board;
         let group = model.groups[player-1];
@@ -52,13 +58,7 @@ class AnimationController {
         animation.start();
     }
 
-    removeAnimation(animation) {
-        const index = this.animations.indexOf(animation);
-        if (index > -1) {
-            this.animations.splice(index, 1);
-        }
-    }
-
+    // Called periodically to update the animations
     update(t) {
         let frogs = Object.keys(this.animations);
         frogs.forEach(frog => {

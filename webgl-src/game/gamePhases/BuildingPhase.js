@@ -1,8 +1,16 @@
+/**
+ * Phase representing the first part of the game where players place frogs in the
+ * board.
+ */
 class BuildingPhase extends GamePhase {
     constructor(controller) {
         super(controller);
     }
 
+    /**
+     * Move performed by BOT.
+     * It will get a random board cell that is free and place a frog in it.
+     */
     async aiMove(){
 
         let currentPlayer = this.controller.currentPlayer;
@@ -32,7 +40,11 @@ class BuildingPhase extends GamePhase {
         this.controller.switchTurn();
     }
 
-
+    /**
+     * If the current player is human, this tick() function will check for user input
+     * and check wether the select coordinates are a valid spot to put a frog and, if it is,
+     * it will update the state by puttig a frog in the selected coordinates.
+     */
     async tick() {
         this.controller.waiting = true;
         let currentPlayer = this.controller.currentPlayer;

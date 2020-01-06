@@ -19,20 +19,24 @@ class FrogMovement {
         this.finished = false;
     }
 
+    // Start the animation
     start() {
         this.animating = true;
         this.finished = false;
         this.startTime = null;
     }
 
+    // Stop the animation
     stop() {
         this.animating = false;
     }
 
+    // Auxiliary function to interpolate between two values
     interpolate(i, f, p) {
         return i + ((f-i)*p);
     }
 
+    // Interpolate between to coordinates
     interpolateCoords(i, f, p) {
         return [
             this.interpolate(i[0],f[0],p),
@@ -41,6 +45,7 @@ class FrogMovement {
         ];
     }
 
+    // Called periodically o update frog position
     update(t) {
         if (!this.animating || this.finished) {
             return;

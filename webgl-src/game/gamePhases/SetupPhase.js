@@ -1,3 +1,7 @@
+/**
+ * Phase in which the game settings are set, such as the gamemode, bot difficulty and
+ * game scenery.
+ */
 class SetupPhase extends GamePhase {
     constructor(controller) {
         super(controller);
@@ -11,10 +15,12 @@ class SetupPhase extends GamePhase {
         this.controller.switchPhase(new BuildingPhase(this.controller));
     }
 
+    // Switch to a free camera mode where the user can explore the scene
     toFreeCam() {
         this.controller.switchPhase(new FreeCam(this.controller));
     }
 
+    // Causes de scene to change
     changeScene(scene) {
         this.scene.sceneInited = false;
         this.scene.graph.reader.open('scenes/'+scene, this.scene.graph);

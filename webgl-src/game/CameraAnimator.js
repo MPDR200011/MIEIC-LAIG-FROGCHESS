@@ -32,11 +32,13 @@ class CameraAnimator {
         this.angleIncrement = 0;
     }
 
+    // Directly sets the scene cameras position
     setPosition(pos) {
         this.scene.camera.setPosition(this.positions[pos]);
         this.currentAngle = this.angles[pos];
     }
 
+    // Adds a position to animate the camera to to the queue
     animateToPos(i) {
         //console.log('animating to pos ' + i);
         
@@ -47,6 +49,7 @@ class CameraAnimator {
         this.queue.push(i);
     }
 
+    // Called periodically to update camera position
     update(t) {
         if (this.queue.length < 1) {
             return;

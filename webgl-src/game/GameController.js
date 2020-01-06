@@ -36,6 +36,8 @@ class GameController {
         this.botThreshold = null;
     }
 
+    // Used to carry out time based logic
+    // Usually used to update game clocks
     update(t) {
         if (this.botThreshold === null) {
             this.botThreshold = t + 2000;
@@ -45,6 +47,7 @@ class GameController {
             this.currentPhase.update(t);
     }
 
+    // Called by the SetupPhase interface to change to game mode
     changeMode(mode) {
         switch(parseInt(mode)) {
             case 0: {
@@ -78,6 +81,8 @@ class GameController {
         }
     }
 
+    // Switches the turn between players
+    // Causes camera rotation if it is needed
     switchTurn() {
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         this.inputQueue = [];
@@ -88,6 +93,9 @@ class GameController {
         console.log("It is now player " + this.currentPlayer + " turn.");
     }
 
+    // Switches to new phase
+    // Calls destroy() of current phase
+    // switches to the new one and then build the interface
     switchPhase(newPhase) {
         if (this.currentPhase) {
             this.currentPhase.destroy();
@@ -101,6 +109,7 @@ class GameController {
         this.inputQueue = [];
     }
 
+    // Called by the scene to register user input
     picked(coords) {
         this.inputQueue.push(coords);
     }
@@ -114,6 +123,7 @@ class GameController {
         this.currentPhase.tick();
     }
 
+    // Called by the scene whenever it is loaded
     initialize() {
         this.waiting = true;
         this.board = this.scene.graph.primitives['boardPiece'];
@@ -127,6 +137,7 @@ class GameController {
     createAnimator(){
         this.animator = new Animator(this,this.scene.animationController.gameSequence)
     }
+    
     replay(){
         this.animator.start();
     }
