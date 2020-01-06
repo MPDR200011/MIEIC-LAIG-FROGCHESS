@@ -267,6 +267,35 @@
 
         </component>
 
+        <component id="tableLeg">
+            <transformation>
+                <translate x="0" y="0" z="0"/>
+                <scale x="20" y="60" z="20"/>
+                <rotate axis="x" angle="90"/>
+            </transformation>
+            <materials>
+                <material id="stone" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref  id = "cone" />
+            </children>
+        </component>
+
+        <component id="tableBase">
+            <transformation>
+                <translate x="0" y="-59" z="0"/>
+                <scale x="40" y="0.001" z="40"/>
+            </transformation>
+            <materials>
+                <material id="stone" />
+            </materials>
+            <texture id="stone" length_s="1" length_t="1" />
+            <children>
+                <primitiveref  id = "demoSphere" />
+            </children>
+        </component>
+
         <component id="demoRoot">
             <transformation>
                 <translate x="0" y="0" z="0" />
@@ -282,6 +311,8 @@
                 <componentref id="totemL" />
                 <componentref id="totemR" />
                 <componentref id="floor" />
+                <componentref id= "tableLeg"/>
+                <componentref id= "tableBase"/>
             </children>
         </component>
     </components>

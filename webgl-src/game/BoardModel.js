@@ -1,14 +1,21 @@
+/**
+ * Class responsible for storing the model of the board and handling some logic
+ */
 class BoardModel extends CGFobject {
     constructor(scene) {
         super(scene);
         this.serverURL = 'http://localhost:8081/';
-        this.board = [];
-        this.frogs = [];
+        this.board = [];//board representation of the board
+        this.frogs = [];//reference for the frog objects
         this.player1Group = new FrogGroup(this.scene, 1);
         this.player2Group = new FrogGroup(this.scene, 2);
         this.groups = [this.player1Group, this.player2Group];
     }
 
+    /**Recieves a saved state the updates the model to mirror it
+     * Used for the undo feature
+     * @param {Array} savedState - board model 
+     */
     resetState(savedState) {
         this.board = savedState.board;
 
@@ -37,16 +44,18 @@ class BoardModel extends CGFobject {
             return frog;
         });
         
-        console.log(this.board);
-        console.log(this.frogs);
-        console.log(this.player1Group.pieces);
-        console.log(this.player2Group.pieces);
     }
 
+    //converts x and y coordinates in the board to absolute coordinates
     getAbsoluteBoardCoords(x, y) {
         return [-17.5 + 5 * x, 0, -17.5 + 5 * y];
     }
 
+    /**
+     * Responsible for executing the move: updating the model and calling the animation of the frog
+     * @param {int} player - number of the player that made the move
+     * @param {Array} move -stores the origin and destin coordinates
+     */
     executeMove(player, move) {
         let board = this.board;
         let frogs = this.frogs;
@@ -84,6 +93,12 @@ class BoardModel extends CGFobject {
            // 250); 
     }
 
+    /**
+     * 
+     * @param {int} player - player of the game
+     * @param {int} x - x coordinate of the board
+     * @param {int} y - y coordinate of the board
+     */
     placeFrog(player, x, y) {
         let group = this.groups[player-1];
 
@@ -96,7 +111,10 @@ class BoardModel extends CGFobject {
         this.frogs[y][x] = frog;
         group.removeTailFrog();
     }
-
+/**
+ * get the empty board representation from the prolog and stores it
+ * also initializes the frogs in the board
+ */
     async initialize() {
         let response = await fetch(this.serverURL + 'defaultBoard', {
             method: 'GET',
@@ -122,7 +140,9 @@ class BoardModel extends CGFobject {
 
 
     }
-
+/**
+ * resets the board to its original state and prepares it for the replay
+ */
     async reset(){
         let response = await fetch(this.serverURL + 'defaultBoard', {
             method: 'GET',
@@ -139,7 +159,9 @@ class BoardModel extends CGFobject {
         this.player2Group.reset();
       
     }
-
+    /**
+     * responsible for displaying the frogs on the board
+     */
     display() {
         this.player1Group.display();
         this.player2Group.display();
