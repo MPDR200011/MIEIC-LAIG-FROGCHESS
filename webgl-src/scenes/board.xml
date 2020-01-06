@@ -39,7 +39,6 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
         <texture id="boardTex" file="scenes/images/marbleBoard.jpg" />
         <texture id="darkMarble" file="scenes/images/darkMarble.jpg" />
         <texture id="wood" file = "scenes/images/tableWood.jpg"/>
@@ -113,18 +112,6 @@
 
 
     <components>
-
-        <component id="test">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="frogMaterial2" />
-            </materials>
-            <texture id="demoTexture" length_s="1" length_t="1" />
-            <children>
-                <primitiveref  id = "frogPlayer1" />
-            </children>
-        </component>
 
         <component id="tableTop">
             <transformation>

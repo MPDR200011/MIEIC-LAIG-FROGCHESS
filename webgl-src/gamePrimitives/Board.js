@@ -1,3 +1,7 @@
+/**
+ * Class responsible for storing all the board tiles
+ */
+
 class Board extends CGFobject {
     constructor(scene) {
         super(scene);

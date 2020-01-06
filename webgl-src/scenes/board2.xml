@@ -37,7 +37,6 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/Ball1.jpg" />
         <texture id="boardTex" file="scenes/images/stained-glass.jpg" />
         <texture id="darkMarble" file="scenes/images/darkMarble.jpg" />
         <texture id="wood" file="scenes/images/tableWood.jpg" />
