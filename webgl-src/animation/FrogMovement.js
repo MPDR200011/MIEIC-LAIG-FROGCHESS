@@ -1,3 +1,9 @@
+/**
+ * Class to represent the animation of a frog jump
+ * 
+ * Takes a start and end position and interpolates between the two
+ * while emulating an arc. This makes it seem like the frog "jumped" to that position.
+ */
 class FrogMovement {
     constructor(scene, frog, time, sCoords, fCoords) {
         this.scene = scene;

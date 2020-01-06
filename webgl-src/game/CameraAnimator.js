@@ -1,3 +1,11 @@
+/**
+ * Class responsible for animating the camera between predefined positions
+ * 
+ * Works mainly by orbiting the camera around the Y axis.
+ * 
+ * Has a position queue, that is periodically checked, when there is a position
+ * to animate to, it will animate the camera to that position.
+ */
 class CameraAnimator {
     constructor(scene) {
         this.scene = scene;
@@ -30,7 +38,7 @@ class CameraAnimator {
     }
 
     animateToPos(i) {
-        console.log('animating to pos ' + i);
+        //console.log('animating to pos ' + i);
         
         if (i < 0 || i > 2) {
             return;
